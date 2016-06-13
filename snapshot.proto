@@ -210,7 +210,7 @@ message FunctionReference {
 
 message QueryReference {
   int32 database_idx = 1;
-  int32 user_idx = 2;
+  int32 role_idx = 2;
   bytes fingerprint = 3;
 }
 
