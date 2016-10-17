@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "shared.proto";
+
+package pganalyze.collector;
+
+message BuffercacheReport {
+  string report_run_uuid = 1;
+
+  repeated DatabaseReference database_references = 10;
+  repeated BuffercacheEntry buffercache_entries = 11;
+
+  int64 total_bytes = 20;
+  int64 free_bytes = 21;
+}
+
+message BuffercacheEntry {
+  int32 database_idx = 1; // index in reference list
+
+  string schema_name = 2; // pg_namespace.nspname
+  string object_name = 3; // pg_class.relname
+  string object_kind = 4; // pg_class.relkind
+
+  int64 bytes = 5;
+}

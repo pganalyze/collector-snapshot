@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "shared.proto";
+
+package pganalyze.collector;
+
+message BloatReport {
+  string report_run_uuid = 1;
+
+  repeated DatabaseReference database_references = 10;
+  repeated RelationReference relation_references = 11;
+  repeated IndexReference index_references = 12;
+
+  repeated RelationBloatStatistic relation_bloat_statistics = 20;
+  repeated IndexBloatStatistic index_bloat_statistics = 21;
+}
+
+enum BloatLookupMethod {
+  ESTIMATE_FAST = 0; // Estimation queries
+  ESTIMATE_SLOW = 1; // pgstattuple_approx
+  FULL_SCAN = 2; // pgstattuple
+}
+
+message RelationBloatStatistic {
+  int32 relation_idx = 1;
+  BloatLookupMethod bloat_lookup_method = 2;
+
+  int64 total_bytes = 3; // Total bytes of the relation, including bloat
+  int64 bloat_bytes = 4; // Wasted or "Free" bytes which can only be reclaimed by a VACUUM FULL
+
+  int64 live_tuple_bytes = 5; // Optional, "tuple_len" from pgstattuple
+  int64 live_tuple_count = 6; // Optional, "tuple_count" from pgstattuple
+  int64 dead_tuple_bytes = 7; // Optional, "dead_tuple_len" from pgstattuple
+  int64 dead_tuple_count = 8; // Optional, "dead_tuple_count" from pgstattuple
+}
+
+message IndexBloatStatistic {
+  int32 index_idx = 1;
+  BloatLookupMethod bloat_lookup_method = 2;
+
+  int64 total_bytes = 3; // Total bytes of the index, including bloat
+  int64 bloat_bytes = 4; // Wasted or "Free" bytes which can only be reclaimed by a REINDEX
+}

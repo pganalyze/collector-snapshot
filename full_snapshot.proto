@@ -1,34 +1,11 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "shared.proto";
 
 package pganalyze.collector;
 
 // Format Version: 1.0.0
-
-// DEFINITIONS
-//
-// - Reference: Term(s) that can be UPSERTed into the monitoring system, and is
-//              referenced by its list index within other parts of the snapshot.
-//
-//              The goal here is that we can do a two-step processing of the data,
-//              first we create/find all references and get their IDs, then we
-//              just COPY all statistics into the database, replacing idx for ID.
-//
-// - Information: Data that is attached to a reference, at most once, and is not stored historically.
-//                When processing this data can simply be UPDATEd after the initial UPSERT.
-//
-//                In some cases this data might also be provided at less frequent intervals than Statistics.
-//
-// - Statistic: Data that is attached to a reference, at most once, and is stored historically.
-//              When processing this data can be COPYed after the initial UPSERT.
-//
-//              In case the input data is a counter, this will be normalized by the collector
-//              before the snapshot is created, the recipient does not need to look at previous
-//              values to find out what happened.
-//
-// - Event: Data that is attached to a reference, and can occur multiple times for one reference within the snapshot.
-//          When processing this data can be COPYed after the initial UPSERT.
 
 message FullSnapshot {
   // Basic information about this snapshot
@@ -71,25 +48,15 @@ message FullSnapshot {
 
   repeated RelationInformation relation_informations = 220;
   repeated RelationStatistic relation_statistics = 221;
-  repeated RelationBloatStatistic relation_bloat_statistics = 222;
+  // reserved 222, used to be relation_bloat_statistics
   repeated RelationEvent relation_events = 223;
 
   repeated IndexInformation index_informations = 224;
   repeated IndexStatistic index_statistics = 225;
-  repeated IndexBloatStatistic index_bloat_statistics = 226;
+  // reserved 226, used to be index_bloat_statistics
 
   repeated FunctionInformation function_informations = 227;
   repeated FunctionStatistic function_statistics = 228;
-}
-
-message NullString {
-  bool valid = 1;
-  string value = 2;
-}
-
-message NullTimestamp {
-  bool valid = 1;
-  google.protobuf.Timestamp value = 2;
 }
 
 // PER SERVER
@@ -107,14 +74,6 @@ message CollectorStatistic {
 
   // Diff-ed statistics between two runs
   int64 cgo_calls = 30;
-}
-
-message RoleReference {
-  string name = 1; // Role name
-}
-
-message DatabaseReference {
-  string name = 1; // Database name
 }
 
 message RoleInformation {
@@ -422,38 +381,6 @@ message DiskPartitionStatistic {
 
 // PER DATABASE
 
-message RelationReference {
-  int32 database_idx = 1;
-  string schema_name = 2;
-  string relation_name = 3;
-}
-
-message IndexReference {
-  int32 database_idx = 1;
-  string schema_name = 2;
-  string index_name = 3;
-}
-
-message FunctionReference {
-  int32 database_idx = 1;
-  string schema_name = 2;
-  string function_name = 3;
-  string arguments = 4;
-}
-
-message QueryReference {
-  int32 database_idx = 1;
-  int32 role_idx = 2;
-  bytes fingerprint = 3;
-}
-
-message QueryInformation {
-  int32 query_idx = 1;
-
-  string normalized_query = 2;
-  repeated int64 query_ids = 3;
-}
-
 message QueryStatistic {
   int32 query_idx = 1;
 
@@ -566,13 +493,6 @@ message RelationEvent {
   bool approximate_occurred_at = 4; // In case the "occurred_at" field is approximate, because more than one kind of this event happened during the snapshot
 }
 
-message RelationBloatStatistic {
-  int32 relation_idx = 1;
-
-  int64 wasted_bytes = 2;
-  int64 size_bytes = 3;
-}
-
 message IndexInformation {
   int32 index_idx = 1;
   int32 relation_idx = 2;
@@ -599,12 +519,6 @@ message IndexStatistic {
   int64 idx_blks_hit = 8;
 }
 
-message IndexBloatStatistic {
-  int32 index_idx = 1;
-
-  int64 wasted_bytes = 2;
-  int64 size_bytes = 3;
-}
 message FunctionInformation {
   int32 function_idx = 1;
 

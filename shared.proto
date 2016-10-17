@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package pganalyze.collector;
+
+message NullString {
+  bool valid = 1;
+  string value = 2;
+}
+
+message NullTimestamp {
+  bool valid = 1;
+  google.protobuf.Timestamp value = 2;
+}
+
+message RoleReference {
+  string name = 1; // Role name
+}
+
+message DatabaseReference {
+  string name = 1; // Database name
+}
+
+message RelationReference {
+  int32 database_idx = 1;
+  string schema_name = 2;
+  string relation_name = 3;
+}
+
+message IndexReference {
+  int32 database_idx = 1;
+  string schema_name = 2;
+  string index_name = 3;
+}
+
+message FunctionReference {
+  int32 database_idx = 1;
+  string schema_name = 2;
+  string function_name = 3;
+  string arguments = 4;
+}
+
+message QueryReference {
+  int32 database_idx = 1;
+  int32 role_idx = 2;
+  bytes fingerprint = 3;
+}
+
+message QueryInformation {
+  int32 query_idx = 1;
+
+  string normalized_query = 2;
+  repeated int64 query_ids = 3;
+}
