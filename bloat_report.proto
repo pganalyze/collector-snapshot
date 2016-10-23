@@ -40,4 +40,10 @@ message IndexBloatStatistic {
 
   int64 total_bytes = 3; // Total bytes of the index, including bloat
   int64 bloat_bytes = 4; // Wasted or "Free" bytes which can only be reclaimed by a REINDEX
+
+  int64 internal_pages = 5;    // Optional, "internal_pages" from pgstatindex
+  int64 leaf_pages = 6;        // Optional, "leaf_pages" from pgstatindex
+  int64 empty_pages = 7;       // Optional, "empty_pages" from pgstatindex
+  int64 deleted_pages = 8;     // Optional, "deleted_pages" from pgstatindex
+  double avg_leaf_density = 9; // Optional, "avg_leaf_density" from pgstatindex
 }
