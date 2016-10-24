@@ -4,9 +4,7 @@ import "shared.proto";
 
 package pganalyze.collector;
 
-message BloatReport {
-  string report_run_uuid = 1;
-
+message BloatReportData {
   repeated DatabaseReference database_references = 10;
   repeated RelationReference relation_references = 11;
   repeated IndexReference index_references = 12;

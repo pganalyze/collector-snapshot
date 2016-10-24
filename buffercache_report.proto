@@ -4,9 +4,7 @@ import "shared.proto";
 
 package pganalyze.collector;
 
-message BuffercacheReport {
-  string report_run_uuid = 1;
-
+message BuffercacheReportData {
   repeated DatabaseReference database_references = 10;
   repeated BuffercacheEntry buffercache_entries = 11;
 
