@@ -12,12 +12,14 @@ message FullSnapshot {
   int32 snapshot_version_major = 1;
   int32 snapshot_version_minor = 2;
   string collector_version = 3;
+  bool failed_run = 4; // failed runs are submitted so we can provide more context in the UI
 
   string snapshot_uuid = 10;
   google.protobuf.Timestamp collected_at = 11;
   uint32 collected_interval_secs = 12;
 
   CollectorStatistic collector_statistic = 20;
+  repeated string collector_errors = 21; // log error messages that happened during the collector run
 
   // Per server (and hence snapshot)
   System system = 100;
