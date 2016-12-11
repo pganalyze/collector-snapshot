@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "shared.proto";
+
+package pganalyze.collector;
+
+message SequenceReportData {
+  repeated DatabaseReference database_references = 10;
+  repeated SequenceReference sequence_references = 11;
+  repeated RelationReference relation_references = 12;
+
+  repeated SequenceInformation sequence_informations = 20;
+  repeated SerialColumnInformation serial_column_informations = 21;
+}
+
+message SequenceReference {
+  int32 database_idx = 1;
+  string schema_name = 2;
+  string sequence_name = 3;
+}
+
+message SequenceInformation {
+  int32 sequence_idx = 1;
+  int64 last_value = 2;
+  int64 start_value = 3;
+  int64 increment_by = 4;
+  int64 max_value = 5;
+  int64 min_value = 6;
+  int64 cache_value = 7;
+  bool is_cycled = 8;
+}
+
+message SerialColumnInformation {
+  int32 sequence_idx = 1;
+  int32 relation_idx = 2;
+  string column_name = 3;
+
+  string data_type = 10;
+  uint64 maximum_value = 11;
+
+  repeated ForeignColumn foreign_columns = 20;
+
+  message ForeignColumn {
+    int32 relation_idx = 1;
+    string column_name = 2;
+
+    string data_type = 10;
+    uint64 maximum_value = 11;
+
+    // True if the relationship has been determined based on names alone, instead of an actual FK constraint
+    bool inferred = 12;
+  }
+}

@@ -4,6 +4,8 @@ import "google/protobuf/timestamp.proto";
 
 import "bloat_report.proto";
 import "buffercache_report.proto";
+import "vacuum_report.proto";
+import "sequence_report.proto";
 
 package pganalyze.collector;
 
@@ -15,5 +17,7 @@ message Report {
   oneof data {
     BloatReportData bloat_report_data = 10;
     BuffercacheReportData buffercache_report_data = 11;
+    VacuumReportData vacuum_report_data = 12;
+    SequenceReportData sequence_report_data = 13;
   }
 }
