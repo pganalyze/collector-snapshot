@@ -184,7 +184,8 @@ message TablespaceInformation {
 
 message System {
   SystemInformation system_information = 1;
-  string system_id = 2; // Unique identifier for this system (pg_controldata / AWS instance ID / etc)
+  string system_id = 2; // Unique identifier for this system
+  string system_scope = 3; // Name the system ID is scoped by (optional)
 
   SchedulerStatistic scheduler_statistic = 10;
   MemoryStatistic memory_statistic = 11;
@@ -235,6 +236,7 @@ message SystemInformationSelfHosted {
   string platform_version = 6;
   string virtualization_system = 7; // Name of the virtualization system (only if we're a guest)
   string kernel_version = 8;
+  string database_system_identifier = 9; // Postgres internal system identifier from pg_controldata
 }
 
 message SystemInformationAmazonRDS {
