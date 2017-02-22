@@ -48,6 +48,8 @@ message FullSnapshot {
   repeated QueryStatistic query_statistics = 211;
   repeated QueryExplain query_explains = 212;
 
+  repeated HistoricQueryStatistics historic_query_statistics = 213;
+
   repeated RelationInformation relation_informations = 220;
   repeated RelationStatistic relation_statistics = 221;
   // reserved 222, used to be relation_bloat_statistics
@@ -403,6 +405,12 @@ message QueryStatistic {
   int64 temp_blks_written = 14;
   double blk_read_time = 15;
   double blk_write_time = 16;
+}
+
+message HistoricQueryStatistics {
+  google.protobuf.Timestamp collected_at = 1;
+  uint32 collected_interval_secs = 2;
+  repeated QueryStatistic statistics = 3;
 }
 
 message QueryExplain {
