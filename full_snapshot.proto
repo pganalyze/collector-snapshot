@@ -34,6 +34,7 @@ message FullSnapshot {
   repeated LogLine logs = 120;
   repeated Backend backends = 121;
   repeated Setting settings = 122;
+  Replication replication = 123;
 
   repeated TablespaceReference tablespace_references = 130;
   repeated TablespaceInformation tablespace_informations = 131;
@@ -154,12 +155,59 @@ message Setting {
   NullString source_line = 8;
 }
 
+message Replication {
+  // Are we the primary, or a standby?
+  bool in_recovery = 1;
+
+  // Primary information
+  string current_xlog_location = 10;
+  repeated StandbyReference standby_references = 11;
+  repeated StandbyInformation standby_informations = 12;
+  repeated StandbyStatistic standby_statistics = 13;
+
+  // Standby information
+  bool is_streaming = 20;
+  string receive_location = 21;
+  string replay_location = 22;
+  int64 apply_byte_lag = 23;
+  google.protobuf.Timestamp replay_timestamp = 24;
+  int64 replay_timestamp_age = 25; // in seconds
+}
+
+message StandbyReference {
+  string client_addr = 1;
+}
+
+message StandbyInformation {
+  int32 standby_idx = 1;
+  int32 role_idx = 2;
+
+  int64 pid = 3;
+  string application_name = 4;
+  string client_hostname = 5;
+  int32 client_port = 6;
+  google.protobuf.Timestamp backend_start = 7;
+  int32 sync_priority = 8;
+  string sync_state = 9;
+}
+
+message StandbyStatistic {
+  int32 standby_idx = 1;
+
+  string state = 2;
+  string sent_location = 3;
+  string write_location = 4;
+  string flush_location = 5;
+  string replay_location = 6;
+  int64 byte_lag = 7;
+}
+
 message Backend {
   int32 database_idx = 1;
   int32 role_idx = 2;
   int32 query_idx = 3; // Optional, -1 if no query currently/previously running
 
-  int64 pid = 4;
+  int32 pid = 4;
   string application_name = 5;
   string client_addr = 6;
 
@@ -170,6 +218,9 @@ message Backend {
 
   bool waiting = 11;
   string state = 12;
+
+  string wait_event_type = 13;
+  string wait_event = 14;
 }
 
 message TablespaceReference {
