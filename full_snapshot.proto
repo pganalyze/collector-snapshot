@@ -131,17 +131,17 @@ message PostgresVersion {
 
 message LogLine {
   int64 occurred_at = 1;
-  SourceType source = 2;
-  NullString client_ip = 3;
-  string log_level = 4;
-  int32 backend_pid = 5;
-  string content = 6;
-  repeated LogLine additional_lines = 7;
+  int32 role_idx = 2;
+  int32 database_idx = 3;
+  int32 query_idx = 4;
 
-  enum SourceType {
-    PostgresSource = 0;
-    AmazonRdsSource = 1;
-  }
+  NullString client_ip = 10;
+  string log_level = 11;
+  int32 backend_pid = 12;
+
+  string content = 20;
+
+  repeated LogLine additional_lines = 30;
 }
 
 message Setting {
