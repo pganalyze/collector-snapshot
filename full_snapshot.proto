@@ -47,7 +47,7 @@ message FullSnapshot {
 
   repeated QueryInformation query_informations = 210;
   repeated QueryStatistic query_statistics = 211;
-  repeated QueryExplain query_explains = 212;
+  repeated QuerySample query_samples = 212;
 
   repeated HistoricQueryStatistics historic_query_statistics = 213;
 
@@ -130,12 +130,18 @@ message PostgresVersion {
 }
 
 message LogLine {
-  int64 occurred_at = 1;
-  int32 role_idx = 2;
-  int32 database_idx = 3;
-  int32 query_idx = 4;
+  google.protobuf.Timestamp occurred_at = 1;
 
-  NullString client_ip = 10;
+  bool has_role_idx = 2;
+  int32 role_idx = 3;
+
+  bool has_database_idx = 4;
+  int32 database_idx = 5;
+
+  bool has_query_idx = 6;
+  int32 query_idx = 7;
+
+  string client_ip = 10;
   string log_level = 11;
   int32 backend_pid = 12;
 
@@ -464,13 +470,16 @@ message HistoricQueryStatistics {
   repeated QueryStatistic statistics = 3;
 }
 
-message QueryExplain {
+message QuerySample {
   int32 query_idx = 1;
+  google.protobuf.Timestamp occurred_at = 2;
+  double runtime_ms = 3;
 
-  int64 occurred_at = 4;
-  double runtime = 5;
-  string explain_output = 6;
-  string explain_error = 7;
+  string original_query = 10; // might be empty if filtered out
+
+  bool has_explain = 20;
+  string explain_output = 21;
+  string explain_error = 22;
 }
 
 message RelationInformation {
