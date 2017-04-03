@@ -142,10 +142,11 @@ message LogLine {
   int32 query_idx = 7;
 
   string client_hostname = 10;
-  string log_level = 11;
+  int32 client_port = 11;
   int32 backend_pid = 12;
 
-  string content = 20;
+  string log_level = 20;
+  string content = 21;
 
   repeated LogLine additional_lines = 30;
 }
