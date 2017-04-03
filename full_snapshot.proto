@@ -141,7 +141,7 @@ message LogLine {
   bool has_query_idx = 6;
   int32 query_idx = 7;
 
-  string client_ip = 10;
+  string client_hostname = 10;
   string log_level = 11;
   int32 backend_pid = 12;
 
