@@ -31,13 +31,16 @@ message FullSnapshot {
   repeated RoleInformation role_informations = 110;
   repeated DatabaseInformation database_informations = 111;
 
-  repeated LogLine logs = 120;
+  // 120 RESERVED
   repeated Backend backends = 121;
   repeated Setting settings = 122;
   Replication replication = 123;
 
   repeated TablespaceReference tablespace_references = 130;
   repeated TablespaceInformation tablespace_informations = 131;
+
+  repeated LogFileReference log_file_references = 140;
+  repeated LogLineInformation log_line_informations = 141;
 
   // Per database
   repeated QueryReference query_references = 200;
@@ -129,26 +132,64 @@ message PostgresVersion {
   int64 numeric = 3;
 }
 
-message LogLine {
-  google.protobuf.Timestamp occurred_at = 1;
+message LogFileReference {
+  string uuid = 1;
+  string s3_location = 2;
+  string s3_cek_algo = 3;
+  string s3_cmk_key_id = 4;
 
-  bool has_role_idx = 2;
-  int32 role_idx = 3;
+  int64 byte_size = 5;
+  string original_name = 6;
+}
 
-  bool has_database_idx = 4;
-  int32 database_idx = 5;
+message LogLineInformation {
+  int32 log_file_idx = 1;
+  int64 byte_start = 2;
+  int64 byte_end = 3;
 
-  bool has_query_idx = 6;
-  int32 query_idx = 7;
+  bool has_role_idx = 4;
+  int32 role_idx = 5;
 
-  string client_hostname = 10;
-  int32 client_port = 11;
-  int32 backend_pid = 12;
+  bool has_database_idx = 6;
+  int32 database_idx = 7;
 
-  string log_level = 20;
-  string content = 21;
+  bool has_query_idx = 8;
+  int32 query_idx = 9;
 
-  repeated LogLine additional_lines = 30;
+  google.protobuf.Timestamp occurred_at = 10;
+  int32 backend_pid = 11;
+
+  enum LogLevel {
+    UNKNOWN = 0;
+
+    // Postgres log levels https://www.postgresql.org/docs/9.6/static/runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS
+    DEBUG = 1; // Provides successively-more-detailed information for use by developers.
+    INFO = 2; // Provides information implicitly requested by the user, e.g., output from VACUUM VERBOSE.
+    NOTICE = 3; // Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+    WARNING = 4; // Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+    ERROR = 5; // Reports an error that caused the current command to abort.
+    LOG = 6; // Reports information of interest to administrators, e.g., checkpoint activity.
+    FATAL = 7; // Reports an error that caused the current session to abort.
+    PANIC = 8; // Reports an error that caused all database sessions to abort.
+
+    // These levels are typically only used in additional lines for context
+    DETAIL = 9;
+    HINT = 10;
+    CONTEXT = 11;
+    STATEMENT = 12;
+  }
+
+  LogLevel log_level = 12;
+
+  enum LogClassification {
+    UNKNOWN_LOG_CLASSIFICATION = 0;
+
+    // Work in progress
+  }
+
+  LogClassification log_classification = 13;
+
+  repeated LogLineInformation additional_lines = 30;
 }
 
 message Setting {
