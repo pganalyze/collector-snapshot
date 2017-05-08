@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package pganalyze.collector;
+
+message CompactLogSnapshot {
+  repeated LogFileReference log_file_references = 1;
+  repeated LogLineInformation log_line_informations = 2;
+  repeated QuerySample query_samples = 3;
+}
+
+message LogFileReference {
+  string uuid = 1;
+  string s3_location = 2;
+  string s3_cek_algo = 3;
+  string s3_cmk_key_id = 4;
+
+  int64 byte_size = 5;
+  string original_name = 6;
+}
+
+message LogLineInformation {
+  int32 log_file_idx = 1;
+
+  string uuid = 2;
+  string parent_uuid = 3; // optional
+
+  int64 byte_start = 4;
+  int64 byte_content_start = 5;
+  int64 byte_end = 6;
+
+  bool has_role_idx = 7;
+  int32 role_idx = 8;
+
+  bool has_database_idx = 9;
+  int32 database_idx = 10;
+
+  bool has_query_idx = 11;
+  int32 query_idx = 12;
+
+  google.protobuf.Timestamp occurred_at = 13;
+  int32 backend_pid = 14;
+
+  enum LogLevel {
+    UNKNOWN = 0;
+
+    // Postgres log levels https://www.postgresql.org/docs/9.6/static/runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS
+    DEBUG = 1; // Provides successively-more-detailed information for use by developers.
+    INFO = 2; // Provides information implicitly requested by the user, e.g., output from VACUUM VERBOSE.
+    NOTICE = 3; // Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+    WARNING = 4; // Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+    ERROR = 5; // Reports an error that caused the current command to abort.
+    LOG = 6; // Reports information of interest to administrators, e.g., checkpoint activity.
+    FATAL = 7; // Reports an error that caused the current session to abort.
+    PANIC = 8; // Reports an error that caused all database sessions to abort.
+
+    // These levels are typically only used in additional lines for context
+    DETAIL = 9;
+    HINT = 10;
+    CONTEXT = 11;
+    STATEMENT = 12;
+    QUERY = 13; // This is specific to PL/pgSQL
+  }
+
+  LogLevel level = 15;
+
+  enum LogClassification {
+    UNKNOWN_LOG_CLASSIFICATION = 0;
+
+    // Server events
+    SERVER_CRASHED = 1; // "Segmentation fault", "was terminated by signal 6", "was terminated by signal 11"
+    SERVER_START = 2; // "database system is ready", "entering standby mode", "database system was shut down"
+    SERVER_START_RECOVERING = 3; // "database system was interrupted", "database system was not properly shut down"
+    SERVER_SHUTDOWN = 4; // "received ... shutdown request", "aborting any active transactions"
+    SERVER_OUT_OF_MEMORY = 5; // "out of memory"
+    SERVER_INVALID_CHECKSUM = 6; // "page verification failed", "invalid page in block"
+    SERVER_TEMP_FILE_CREATED = 7; // "temporary file: "
+    SERVER_MISC = 8; // "could not open usermap file", "invalid byte sequence for encoding", "could not link file", "unexpected pageaddr"
+    SERVER_RELOAD = 9; // "received SIGHUP, reloading configuration files", config change related messages
+
+    // Connection-related
+    CONNECTION_RECEIVED = 20; // "connection received: "
+    CONNECTION_AUTHORIZED = 21; // "connection authorized: "
+    CONNECTION_REJECTED = 22; // "pg_hba.conf rejects connection", "is not currently accepting connections", "password authentication failed", "role ... is not permitted to log in"
+    CONNECTION_DISCONNECTED = 23; // "disconnection: "
+    CONNECTION_CLIENT_FAILED_TO_CONNECT = 24; // "incomplete startup packet"
+    CONNECTION_LOST = 25; // "connection to client lost", "could not receive data from client", "terminating connection because protocol synchronization was lost", "could not send data to client"
+    CONNECTION_LOST_OPEN_TX = 26; // "unexpected EOF on client connection with an open transaction"
+    CONNECTION_TERMINATED = 27; // "terminating connection due to administrator command"
+    OUT_OF_CONNECTIONS = 28; // "remaining connection slots are reserved for non-replication superuser connections"
+    TOO_MANY_CONNECTIONS_ROLE = 29; // "too many connections for role"
+
+    // Checkpointer related
+    CHECKPOINT_STARTING = 40; // "checkpoint starting: "
+    CHECKPOINT_COMPLETE = 41; // "checkpoint complete: "
+    CHECKPOINT_TOO_FREQUENT = 42; // "checkpoints are occurring too frequently"
+    RESTARTPOINT_STARTING = 43; // "restartpoint starting: "
+    RESTARTPOINT_COMPLETE = 44; // "restartpoint complete: "
+    RESTARTPOINT_AT = 45; // "recovery restart point at"
+
+    // WAL/Archiving
+    WAL_INVALID_RECORD_LENGTH = 50; // "invalid record length"
+    WAL_REDO = 51; // "redo "
+
+    // Autovacuum
+    AUTOVACUUM_CANCEL = 60; // "canceling autovacuum task"
+    TXID_WRAPAROUND_WARNING = 61; // "database * must be vacuumed within"
+    TXID_WRAPAROUND_ERROR = 62; // "database is not accepting commands to avoid wraparound data loss"
+    AUTOVACUUM_LAUNCHER_STARTED = 63; // "autovacuum launcher started"
+    AUTOVACUUM_LAUNCHER_SHUTTING_DOWN = 64; // "autovacuum launcher shutting down"
+    AUTOVACUUM_COMPLETED = 65; // "automatic vacuum of table"
+    AUTOANALYZE_COMPLETED = 66; // "automatic analyze of table"
+
+    // Locks
+    LOCK_ACQUIRED = 70; // "acquired *Lock"
+    LOCK_WAITING = 71; // "still waiting for *Lock"
+    LOCK_TIMEOUT = 72; // "canceling statement due to lock timeout"
+    LOCK_DEADLOCK_DETECTED = 73; // "process * detected deadlock while waiting"
+    LOCK_DEADLOCK_AVOIDED = 74; // "process * avoided deadlock for *Lock"
+
+    // Notices about statement execution
+    STATEMENT_DURATION = 80; // "duration: "
+    STATEMENT_CANCELED_TIMEOUT = 81; // "canceling statement due to statement timeout"
+    STATEMENT_CANCELED_USER = 82; // "canceling statement due to user request"
+
+    // Standby
+    STANDBY_RESTORED_WAL_FROM_ARCHIVE = 90; // "restored log file * from archive"
+    STANDBY_STARTED_STREAMING = 91; // "started streaming WAL"
+    STANDBY_STREAMING_INTERRUPTED = 92; // "could not receive data from WAL stream"
+    STANDBY_STOPPED_STREAMING = 93; // "terminating walreceiver process"
+    STANDBY_CONSISTENT_RECOVERY_STATE = 94; // "consistent recovery state reached at"
+    STANDBY_STATEMENT_CANCELED = 95; // "canceling statement due to conflict with recovery"
+    STANDBY_INVALID_TIMELINE = 96; // "according to history file, WAL location ... belongs to timeline X, but previous recovered WAL file came from timeline Y"
+
+    // Constraint violations
+    UNIQUE_CONSTRAINT_VIOLATION = 100; // "duplicate key value violates unique constraint"
+    FOREIGN_KEY_CONSTRAINT_VIOLATION = 101; // "update or delete on table ... violates foreign key constraint"
+    NOT_NULL_CONSTRAINT_VIOLATION = 102; // "null value in column ... violates not-null constraint"
+    CHECK_CONSTRAINT_VIOLATION = 103; // "new row for relation ... violates check constraint"
+    EXCLUSION_CONSTRAINT_VIOLATION = 104; // "conflicting key value violates exclusion constraint"
+  }
+
+  LogClassification classification = 16;
+
+  string details_json = 17; // JSON-encoded additional details about this log line
+}
+
+message QuerySample {
+  int32 query_idx = 1;
+  google.protobuf.Timestamp occurred_at = 2;
+  double runtime_ms = 3;
+
+  string log_line_uuid = 10;
+
+  bool has_explain = 20;
+  string explain_output = 21;
+  string explain_error = 22;
+}
