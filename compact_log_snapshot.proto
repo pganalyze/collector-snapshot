@@ -150,6 +150,8 @@ message QuerySample {
   int32 query_idx = 1;
   google.protobuf.Timestamp occurred_at = 2;
   double runtime_ms = 3;
+  string query_text = 4;
+  repeated string parameters = 5;
 
   string log_line_uuid = 10;
 
