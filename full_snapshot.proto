@@ -32,7 +32,7 @@ message FullSnapshot {
   repeated DatabaseInformation database_informations = 111;
 
   reserved 120;
-  repeated Backend backends = 121;
+  reserved 121; // This used to be backends before we moved them to their own compact snapshot
   repeated Setting settings = 122;
   Replication replication = 123;
 
@@ -122,12 +122,6 @@ message DatabaseInformation {
   bool collected_local_catalog_data = 11;
 }
 
-message PostgresVersion {
-  string full = 1;
-  string short = 2;
-  int64 numeric = 3;
-}
-
 message Setting {
   string name = 1;
   string current_value = 2;
@@ -184,27 +178,6 @@ message StandbyStatistic {
   string flush_location = 5;
   string replay_location = 6;
   int64 byte_lag = 7;
-}
-
-message Backend {
-  int32 database_idx = 1;
-  int32 role_idx = 2;
-  int32 query_idx = 3; // Optional, -1 if no query currently/previously running
-
-  int32 pid = 4;
-  string application_name = 5;
-  string client_addr = 6;
-
-  google.protobuf.Timestamp backend_start = 7;
-  google.protobuf.Timestamp xact_start = 8;
-  google.protobuf.Timestamp query_start = 9;
-  google.protobuf.Timestamp state_change = 10;
-
-  bool waiting = 11;
-  string state = 12;
-
-  string wait_event_type = 13;
-  string wait_event = 14;
 }
 
 message TablespaceReference {

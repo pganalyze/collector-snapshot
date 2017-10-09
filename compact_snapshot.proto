@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
+import "compact_activity_snapshot.proto";
 import "compact_log_snapshot.proto";
 import "compact_system_snapshot.proto";
 import "shared.proto";
@@ -31,5 +32,6 @@ message CompactSnapshot {
   oneof data {
     CompactLogSnapshot log_snapshot = 10;
     CompactSystemSnapshot system_snapshot = 11;
+    CompactActivitySnapshot activity_snapshot = 12;
   }
 }

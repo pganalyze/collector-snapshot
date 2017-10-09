@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "shared.proto";
+
+package pganalyze.collector;
+
+message CompactActivitySnapshot {
+  PostgresVersion postgres_version = 1;
+  repeated Backend backends = 2;
+}
+
+message Backend {
+  uint64 identity = 1; // Server-wide unique identifier (backend_start + PID)
+  int32 pid = 2;
+
+  bool has_role_idx = 3;
+  int32 role_idx = 4;
+
+  bool has_database_idx = 5;
+  int32 database_idx = 6;
+
+  bool has_query_idx = 7;
+  int32 query_idx = 8;
+
+  string query_text = 9;
+
+  string application_name = 10;
+  string client_addr = 11;
+  int32 client_port = 12;
+
+  google.protobuf.Timestamp backend_start = 13;
+  google.protobuf.Timestamp xact_start = 14;
+  google.protobuf.Timestamp query_start = 15;
+  google.protobuf.Timestamp state_change = 16;
+
+  bool waiting = 17;
+  string state = 18;
+
+  string wait_event_type = 19;
+  string wait_event = 20;
+  string backend_type = 21;
+}
