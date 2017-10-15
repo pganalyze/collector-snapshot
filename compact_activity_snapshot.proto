@@ -8,6 +8,9 @@ package pganalyze.collector;
 message CompactActivitySnapshot {
   PostgresVersion postgres_version = 1;
   repeated Backend backends = 2;
+
+  repeated VacuumProgressInformation vacuum_progress_informations = 10;
+  repeated VacuumProgressStatistic vacuum_progress_statistics = 11;
 }
 
 message Backend {
@@ -40,4 +43,37 @@ message Backend {
   string wait_event_type = 19;
   string wait_event = 20;
   string backend_type = 21;
+}
+
+message VacuumProgressInformation {
+  uint64 vacuum_identity = 1; // Server-wide unique identifier for this vacuum run (query_start + PID)
+
+  int32 role_idx = 2;
+  int32 database_idx = 3;
+  int32 relation_idx = 4;
+  uint64 backend_identity = 5;
+
+  google.protobuf.Timestamp started_at = 6;
+  bool autovacuum = 7;
+}
+
+message VacuumProgressStatistic {
+  enum VacuumPhase {
+    INITIALIZING = 0;   // "initializing"
+    SCAN_HEAP = 1;      // "scanning heap"
+    VACUUM_INDEX = 2;   // "vacuuming indexes"
+    VACUUM_HEAP = 3;    // "vacuuming heap"
+    INDEX_CLEANUP = 4;  // "cleaning up indexes"
+    TRUNCATE = 5;       // "truncating heap"
+    FINAL_CLEANUP = 6;  // "performing final cleanup"
+  }
+
+  uint64 vacuum_identity = 1; // Server-wide unique identifier for this vacuum run (query_start + PID)
+  VacuumPhase phase = 2;
+  int64 heap_blks_total = 3;
+  int64 heap_blks_scanned = 4;
+  int64 heap_blks_vacuumed = 5;
+  int64 index_vacuum_count = 6;
+  int64 max_dead_tuples = 7;
+  int64 num_dead_tuples = 8;
 }
