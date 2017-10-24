@@ -144,6 +144,9 @@ message LogLineInformation {
   LogClassification classification = 16;
 
   string details_json = 17; // JSON-encoded additional details about this log line
+
+  bool has_relation_idx = 18;
+  int32 relation_idx = 19;
 }
 
 message QuerySample {
