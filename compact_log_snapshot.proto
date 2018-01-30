@@ -90,6 +90,9 @@ message LogLineInformation {
     CONNECTION_TERMINATED = 27; // "terminating connection due to administrator command"
     OUT_OF_CONNECTIONS = 28; // "remaining connection slots are reserved for non-replication superuser connections"
     TOO_MANY_CONNECTIONS_ROLE = 29; // "too many connections for role"
+    COULD_NOT_ACCEPT_SSL_CONNECTION = 30; // "could not accept SSL connection: ..."
+    PROTOCOL_ERROR_UNSUPPORTED_VERSION = 31; // "unsupported frontend protocol ...: server supports ... to ..."
+    PROTOCOL_ERROR_INCOMPLETE_MESSAGE = 32; // "incomplete message from client"
 
     // Checkpointer related
     CHECKPOINT_STARTING = 40; // "checkpoint starting: "
@@ -123,6 +126,7 @@ message LogLineInformation {
     STATEMENT_DURATION = 80; // "duration: "
     STATEMENT_CANCELED_TIMEOUT = 81; // "canceling statement due to statement timeout"
     STATEMENT_CANCELED_USER = 82; // "canceling statement due to user request"
+    STATEMENT_LOG = 83; // "statement: ", "execute ...:"
 
     // Standby
     STANDBY_RESTORED_WAL_FROM_ARCHIVE = 90; // "restored log file * from archive"
@@ -139,6 +143,35 @@ message LogLineInformation {
     NOT_NULL_CONSTRAINT_VIOLATION = 102; // "null value in column ... violates not-null constraint"
     CHECK_CONSTRAINT_VIOLATION = 103; // "new row for relation ... violates check constraint"
     EXCLUSION_CONSTRAINT_VIOLATION = 104; // "conflicting key value violates exclusion constraint"
+
+    // Application errors
+    SYNTAX_ERROR = 110; // "syntax error at or near"
+    INVALID_INPUT_SYNTAX = 111; // "invalid input syntax"
+    VALUE_TOO_LONG_FOR_TYPE = 112; // "value too long for type"
+    INVALID_VALUE = 113; // "invalid value ... for ..."
+    MALFORMED_ARRAY_LITERAL = 114; // "malformed array literal"
+    SUBQUERY_MISSING_ALIAS = 115; // "subquery in FROM must have an alias"
+    INSERT_TARGET_COLUMN_MISMATCH = 116; // "INSERT has more expressions than target columns"
+    ANY_ALL_REQUIRES_ARRAY = 117; // "op ANY/ALL (array) requires array on right side"
+    COLUMN_MISSING_FROM_GROUP_BY = 118; // "column ... must appear in the GROUP BY clause or be used in an aggregate function"
+    RELATION_DOES_NOT_EXIST = 119; // "relation ... does not exist"
+    COLUMN_DOES_NOT_EXIST = 120; // "column ... does not exist"
+    OPERATOR_DOES_NOT_EXIST = 121; // "operator does not exist"
+    COLUMN_REFERENCE_AMBIGUOUS = 122; // "column reference ... is ambiguous"
+    PERMISSION_DENIED = 123; // "permission denied for ..."
+    TRANSACTION_IS_ABORTED = 124; // "current transaction is aborted, commands ignored until end of transaction block"
+    ON_CONFLICT_NO_CONSTRAINT_MATCH = 125; // "there is no unique or exclusion constraint matching the ON CONFLICT specification"
+    ON_CONFLICT_ROW_AFFECTED_TWICE = 126; // "ON CONFLICT DO UPDATE command cannot affect row a second time"
+    COLUMN_CANNOT_BE_CAST = 127; // "column ... cannot be cast to type ..."
+    DIVISION_BY_ZERO = 128; // "division by zero"
+    CANNOT_DROP = 129; // "cannot drop ... because other objects depend on it"
+    INTEGER_OUT_OF_RANGE = 130; // "integer out of range"
+    INVALID_REGEXP = 131; // "invalid regular expression: ..."
+    PARAM_MISSING = 132; // "there is no parameter $.. at character ..."
+    FUNCTION_DOES_NOT_EXIST = 133; // "function ... does not exist"
+    NO_SUCH_SAVEPOINT = 134; // "no such savepoint"
+    UNTERMINATED_QUOTED_STRING = 135; // "unterminated quoted string at or near ..."
+    UNTERMINATED_QUOTED_IDENTIFIER = 136; // "unterminated quoted identifier at or near ..."
   }
 
   LogClassification classification = 16;
