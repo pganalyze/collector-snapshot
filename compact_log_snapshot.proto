@@ -183,6 +183,8 @@ message LogLineInformation {
 
   bool has_relation_idx = 18;
   int32 relation_idx = 19;
+
+  repeated int32 related_pids = 20; // Other PIDs that are related to this log line (mentioned in some way)
 }
 
 message QuerySample {
