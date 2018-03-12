@@ -78,6 +78,7 @@ message LogLineInformation {
     SERVER_TEMP_FILE_CREATED = 7; // "temporary file: "
     SERVER_MISC = 8; // "could not open usermap file", "invalid byte sequence for encoding", "could not link file", "unexpected pageaddr"
     SERVER_RELOAD = 9; // "received SIGHUP, reloading configuration files", config change related messages
+    SERVER_PROCESS_EXITED = 10; // "worker process: parallel worker for PID ... (PID ...) exited with exit code ..."
 
     // Connection-related
     CONNECTION_RECEIVED = 20; // "connection received: "
@@ -105,13 +106,14 @@ message LogLineInformation {
     // WAL/Archiving
     WAL_INVALID_RECORD_LENGTH = 50; // "invalid record length"
     WAL_REDO = 51; // "redo "
+    WAL_ARCHIVE_COMMAND_FAILED = 52; // "archive command failed"
 
     // Autovacuum
     AUTOVACUUM_CANCEL = 60; // "canceling autovacuum task"
     TXID_WRAPAROUND_WARNING = 61; // "database * must be vacuumed within"
     TXID_WRAPAROUND_ERROR = 62; // "database is not accepting commands to avoid wraparound data loss"
     AUTOVACUUM_LAUNCHER_STARTED = 63; // "autovacuum launcher started"
-    AUTOVACUUM_LAUNCHER_SHUTTING_DOWN = 64; // "autovacuum launcher shutting down"
+    AUTOVACUUM_LAUNCHER_SHUTTING_DOWN = 64; // "autovacuum launcher shutting down", "terminating autovacuum process due to administrator command"
     AUTOVACUUM_COMPLETED = 65; // "automatic vacuum of table"
     AUTOANALYZE_COMPLETED = 66; // "automatic analyze of table"
 
