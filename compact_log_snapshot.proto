@@ -175,6 +175,9 @@ message LogLineInformation {
     NO_SUCH_SAVEPOINT = 134; // "no such savepoint"
     UNTERMINATED_QUOTED_STRING = 135; // "unterminated quoted string at or near ..."
     UNTERMINATED_QUOTED_IDENTIFIER = 136; // "unterminated quoted identifier at or near ..."
+
+    // Collector internal events
+    PGA_COLLECTOR_IDENTIFY = 1000; // "pganalyze-collector-identify: server1"
   }
 
   LogClassification classification = 16;
