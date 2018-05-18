@@ -94,6 +94,7 @@ message LogLineInformation {
     COULD_NOT_ACCEPT_SSL_CONNECTION = 30; // "could not accept SSL connection: ..."
     PROTOCOL_ERROR_UNSUPPORTED_VERSION = 31; // "unsupported frontend protocol ...: server supports ... to ..."
     PROTOCOL_ERROR_INCOMPLETE_MESSAGE = 32; // "incomplete message from client"
+    TOO_MANY_CONNECTIONS_DATABASE = 33; // "too many connections for database"
 
     // Checkpointer related
     CHECKPOINT_STARTING = 40; // "checkpoint starting: "
