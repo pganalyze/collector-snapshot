@@ -76,7 +76,7 @@ message LogLineInformation {
     SERVER_OUT_OF_MEMORY = 5; // "out of memory"
     SERVER_INVALID_CHECKSUM = 6; // "page verification failed", "invalid page in block"
     SERVER_TEMP_FILE_CREATED = 7; // "temporary file: "
-    SERVER_MISC = 8; // "could not open usermap file", "invalid byte sequence for encoding", "could not link file", "unexpected pageaddr"
+    SERVER_MISC = 8; // "could not open usermap file", "could not link file", "unexpected pageaddr"
     SERVER_RELOAD = 9; // "received SIGHUP, reloading configuration files", config change related messages
     SERVER_PROCESS_EXITED = 10; // "worker process: parallel worker for PID ... (PID ...) exited with exit code ..."
 
@@ -176,6 +176,7 @@ message LogLineInformation {
     NO_SUCH_SAVEPOINT = 134; // "no such savepoint"
     UNTERMINATED_QUOTED_STRING = 135; // "unterminated quoted string at or near ..."
     UNTERMINATED_QUOTED_IDENTIFIER = 136; // "unterminated quoted identifier at or near ..."
+    INVALID_BYTE_SEQUENCE = 137; // "invalid byte sequence for encoding"
 
     // Collector internal events
     PGA_COLLECTOR_IDENTIFY = 1000; // "pganalyze-collector-identify: server1"
