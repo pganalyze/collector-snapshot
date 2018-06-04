@@ -35,6 +35,7 @@ message FullSnapshot {
   reserved 121; // This used to be backends before we moved them to their own compact snapshot
   repeated Setting settings = 122;
   Replication replication = 123;
+  repeated BackendCountStatistic backend_count_statistics = 124;
 
   repeated TablespaceReference tablespace_references = 130;
   repeated TablespaceInformation tablespace_informations = 131;
@@ -178,6 +179,40 @@ message StandbyStatistic {
   string flush_location = 5;
   string replay_location = 6;
   int64 byte_lag = 7;
+}
+
+message BackendCountStatistic {
+  enum BackendState {
+    UNKNOWN_STATE = 0;               // unknown
+    ACTIVE = 1;                      // active
+    IDLE = 2;                        // idle
+    IDLE_IN_TRANSACTION = 3;         // idle in transaction
+    IDLE_IN_TRANSACTION_ABORTED = 4; // idle in transaction (aborted)
+    FASTPATH_FUNCTION_CALL = 5;      // fastpath function call
+    DISABLED = 6;                    // disabled
+  }
+
+  enum BackendType {
+    UNKNOWN_TYPE = 0;        // unknown
+    AUTOVACUUM_LAUNCHER = 1; // autovacuum launcher
+    AUTOVACUUM_WORKER = 2;   // autovacuum worker
+    BACKGROUND_WORKER = 3;   // background worker
+    BACKGROUND_WRITER = 4;   // background writer
+    CLIENT_BACKEND = 5;      // client backend
+    CHECKPOINTER = 6;        // checkpointer
+    STARTUP = 7;             // startup
+    WALRECEIVER = 8;         // walreceiver
+    WALSENDER = 9;           // walsender
+    WALWRITER = 10;          // walwriter
+  }
+
+  int32 database_idx = 1; // -1 when there is no database associated
+  int32 role_idx = 2;     // -1 when there is no role associated
+
+  BackendState state = 3;
+  BackendType backend_type = 4;
+  bool waiting_for_lock = 5;
+  int32 count = 6;
 }
 
 message TablespaceReference {
