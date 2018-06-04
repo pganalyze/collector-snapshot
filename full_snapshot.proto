@@ -206,13 +206,16 @@ message BackendCountStatistic {
     WALWRITER = 10;          // walwriter
   }
 
-  int32 database_idx = 1; // -1 when there is no database associated
-  int32 role_idx = 2;     // -1 when there is no role associated
+  bool has_role_idx = 1;
+  int32 role_idx = 2;
 
-  BackendState state = 3;
-  BackendType backend_type = 4;
-  bool waiting_for_lock = 5;
-  int32 count = 6;
+  bool has_database_idx = 3;
+  int32 database_idx = 4;
+
+  BackendState state = 5;
+  BackendType backend_type = 6;
+  bool waiting_for_lock = 7;
+  int32 count = 8;
 }
 
 message TablespaceReference {
