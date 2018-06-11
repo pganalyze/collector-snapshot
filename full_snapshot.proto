@@ -280,6 +280,8 @@ message RelationInformation {
   // relation, this also means we won't have columns/index/constraints information
   bool exclusively_locked = 13;
 
+  map<string, string> options = 14;
+
   message Column {
     string name = 2;
     string data_type = 3;
