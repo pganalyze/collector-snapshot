@@ -117,6 +117,8 @@ message LogLineInformation {
     AUTOVACUUM_LAUNCHER_SHUTTING_DOWN = 64; // "autovacuum launcher shutting down", "terminating autovacuum process due to administrator command"
     AUTOVACUUM_COMPLETED = 65; // "automatic vacuum of table"
     AUTOANALYZE_COMPLETED = 66; // "automatic analyze of table"
+    SKIPPING_VACUUM_LOCK_NOT_AVAILABLE = 67; // "skipping vacuum of ... --- lock not available"
+    SKIPPING_ANALYZE_LOCK_NOT_AVAILABLE = 68; // "skipping analyze of ... --- lock not available"
 
     // Locks
     LOCK_ACQUIRED = 70; // "acquired *Lock"
