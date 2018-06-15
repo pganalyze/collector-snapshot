@@ -140,6 +140,8 @@ message SystemInformationAmazonRDS {
 
   string parameter_apply_status = 40;
   bool parameter_pgss_enabled = 41;
+
+  bool is_aurora_postgres = 50;
 }
 
 message SchedulerStatistic {
