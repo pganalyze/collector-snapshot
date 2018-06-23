@@ -179,6 +179,8 @@ message LogLineInformation {
     UNTERMINATED_QUOTED_STRING = 135; // "unterminated quoted string at or near ..."
     UNTERMINATED_QUOTED_IDENTIFIER = 136; // "unterminated quoted identifier at or near ..."
     INVALID_BYTE_SEQUENCE = 137; // "invalid byte sequence for encoding"
+    COULD_NOT_SERIALIZE_REPEATABLE_READ = 138; // "could not serialize access due to concurrent update"
+    COULD_NOT_SERIALIZE_SERIALIZABLE = 139; // "could not serialize access due to read/write dependencies among transactions"
 
     // Collector internal events
     PGA_COLLECTOR_IDENTIFY = 1000; // "pganalyze-collector-identify: server1"
