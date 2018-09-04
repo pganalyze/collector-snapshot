@@ -51,6 +51,8 @@ message FullSnapshot {
 
   repeated HistoricQueryStatistics historic_query_statistics = 213;
 
+  repeated QueryExplainInformation query_explains = 214;
+
   repeated RelationInformation relation_informations = 220;
   repeated RelationStatistic relation_statistics = 221;
   reserved 222;
