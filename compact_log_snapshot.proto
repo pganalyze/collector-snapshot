@@ -79,6 +79,7 @@ message LogLineInformation {
     SERVER_MISC = 8; // "could not open usermap file", "could not link file", "unexpected pageaddr"
     SERVER_RELOAD = 9; // "received SIGHUP, reloading configuration files", config change related messages
     SERVER_PROCESS_EXITED = 10; // "worker process: parallel worker for PID ... (PID ...) exited with exit code ..."
+    SERVER_STATS_COLLECTOR_TIMEOUT = 11; // "using stale statistics instead of current ones because stats collector is not responding", "pgstat wait timeout"
 
     // Connection-related
     CONNECTION_RECEIVED = 20; // "connection received: "
@@ -108,6 +109,7 @@ message LogLineInformation {
     WAL_INVALID_RECORD_LENGTH = 50; // "invalid record length"
     WAL_REDO = 51; // "redo "
     WAL_ARCHIVE_COMMAND_FAILED = 52; // "archive command failed"
+    WAL_BASE_BACKUP_COMPLETE = 53; // "pg_stop_backup complete, all required WAL segments have been archived"
 
     // Autovacuum
     AUTOVACUUM_CANCEL = 60; // "canceling autovacuum task"
