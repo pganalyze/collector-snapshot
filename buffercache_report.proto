@@ -20,4 +20,5 @@ message BuffercacheEntry {
   string object_kind = 4; // pg_class.relkind
 
   int64 bytes = 5;
+  bool toast = 6; // whether a referenced table was the toast table
 }
