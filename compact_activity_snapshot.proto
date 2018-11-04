@@ -55,6 +55,7 @@ message VacuumProgressInformation {
 
   google.protobuf.Timestamp started_at = 6;
   bool autovacuum = 7;
+  bool toast = 8;
 }
 
 message VacuumProgressStatistic {
