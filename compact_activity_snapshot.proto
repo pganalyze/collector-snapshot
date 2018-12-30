@@ -14,6 +14,26 @@ message CompactActivitySnapshot {
 }
 
 message Backend {
+  enum WaitEventType {
+    UNKNOWN_WAIT_EVENT_TYPE = 0;
+    LW_LOCK_NAMED = 1; // LWLockNamed
+    LW_LOCK_TRANCHE = 2; // LWLockTranche
+    LOCK = 3; // Lock
+    BUFFER_PIN = 4; // BufferPin
+    LW_LOCK = 5; // LWLock
+    ACTIVITY = 6; // Activity
+    CLIENT = 7; // Client
+    EXTENSION = 8; // Extension
+    IPC = 9; // IPC
+    TIMEOUT = 10; // Timeout
+    IO = 11; // IO
+  }
+
+  enum WaitEvent {
+    UNKNOWN_WAIT_EVENT = 0;
+    // TODO
+  }
+
   uint64 identity = 1; // Server-wide unique identifier (backend_start + PID)
   int32 pid = 2;
 
