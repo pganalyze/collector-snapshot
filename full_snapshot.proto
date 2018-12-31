@@ -184,6 +184,7 @@ message StandbyStatistic {
 }
 
 message BackendCountStatistic {
+  // ! When changing this, also update mappings/backend_state.json
   enum BackendState {
     UNKNOWN_STATE = 0;               // unknown
     ACTIVE = 1;                      // active
@@ -194,6 +195,7 @@ message BackendCountStatistic {
     DISABLED = 6;                    // disabled
   }
 
+  // ! When changing this, also update mappings/backend_type.json
   enum BackendType {
     UNKNOWN_TYPE = 0;        // unknown
     AUTOVACUUM_LAUNCHER = 1; // autovacuum launcher
