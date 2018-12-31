@@ -120,6 +120,7 @@ message Backend {
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
     // Source: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_EXTENSION = 400; // Extension
+    WAIT_EVENT_PG_STAT_STATEMENTS = 401; // pg_stat_statements
     // Source: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
     WAIT_EVENT_ARCHIVER_MAIN = 500; // ArchiverMain
     WAIT_EVENT_AUTOVACUUM_MAIN = 501; // AutoVacuumMain
@@ -253,6 +254,8 @@ message Backend {
     WAIT_EVENT_WAL_SYNC = 965; // WALSync
     WAIT_EVENT_WAL_SYNC_METHOD_ASSIGN = 966; // WALSyncMethodAssign
     WAIT_EVENT_WAL_WRITE = 967; // WALWrite
+    // Custom third-party events for Postgres forks
+    WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (Aurora)
   }
 
   uint64 identity = 1; // Server-wide unique identifier (backend_start + PID)

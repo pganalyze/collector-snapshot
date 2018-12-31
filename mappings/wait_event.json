@@ -81,6 +81,7 @@
   "advisory": 209,
   "BufferPin": 300,
   "Extension": 400,
+  "pg_stat_statements": 401,
   "ArchiverMain": 500,
   "AutoVacuumMain": 501,
   "BgWriterHibernate": 502,
@@ -208,5 +209,6 @@
   "WALRead": 964,
   "WALSync": 965,
   "WALSyncMethodAssign": 966,
-  "WALWrite": 967
+  "WALWrite": 967,
+  "XactSync": 10000
 }
