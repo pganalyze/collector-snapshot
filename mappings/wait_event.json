@@ -210,5 +210,7 @@
   "WALSync": 965,
   "WALSyncMethodAssign": 966,
   "WALWrite": 967,
-  "XactSync": 10000
+  "XactSync": 10000,
+  "AuroraReaderMain": 10001,
+  "AuroraRuntimeMain": 10002
 }
