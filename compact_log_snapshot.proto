@@ -18,6 +18,18 @@ message LogFileReference {
 
   int64 byte_size = 5;
   string original_name = 6;
+
+  enum LogSecretKind {
+    CREDENTIAL_LOG_SECRET = 0;
+    PARSING_ERROR_LOG_SECRET = 1;
+    STATEMENT_TEXT_LOG_SECRET = 2;
+    STATEMENT_PARAMETER_LOG_SECRET = 3;
+    TABLE_DATA_LOG_SECRET = 4;
+    OPS_LOG_SECRET = 5;
+    UNIDENTIFIED_LOG_SECRET = 6;
+  }
+
+  repeated LogSecretKind filter_log_secret = 10;
 }
 
 message LogLineInformation {
