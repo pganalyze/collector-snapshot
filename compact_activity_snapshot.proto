@@ -256,6 +256,8 @@ message Backend {
     WAIT_EVENT_WAL_WRITE = 967; // WALWrite
     // Custom third-party events for Postgres forks
     WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (Aurora)
+    AURORA_READER_MAIN = 10001; // AuroraReaderMain (Aurora)
+    AURORA_RUNTIME_MAIN = 10002; // AuroraRuntimeMain (Aurora)
   }
 
   uint64 identity = 1; // Server-wide unique identifier (backend_start + PID)
