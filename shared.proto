@@ -149,7 +149,7 @@ message SystemInformationAmazonRDS {
   string secondary_availability_zone = 8;
   string ca_certificate = 9;
   bool auto_minor_version_upgrade = 10;
-  bool auto_major_version_upgrade = 11;
+  reserved 11;
   string preferred_maintenance_window = 12;
   string preferred_backup_window = 14;
   google.protobuf.Timestamp latest_restorable_time = 13;
@@ -158,9 +158,14 @@ message SystemInformationAmazonRDS {
   string initial_db_name = 17;
   google.protobuf.Timestamp created_at = 18;
   bool enhanced_monitoring = 19;
+  bool performance_insights = 20;
+  bool postgres_log_export = 21;
+  bool iam_authentication = 22;
+  bool deletion_protection = 23;
 
   string parameter_apply_status = 40;
   bool parameter_pgss_enabled = 41;
+  bool parameter_auto_explain_enabled = 42;
 
   bool is_aurora_postgres = 50;
 }
