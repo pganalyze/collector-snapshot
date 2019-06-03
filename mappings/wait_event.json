@@ -212,5 +212,6 @@
   "WALWrite": 967,
   "XactSync": 10000,
   "AuroraReaderMain": 10001,
-  "AuroraRuntimeMain": 10002
+  "AuroraRuntimeMain": 10002,
+  "citus_query_stats": 10003,
 }

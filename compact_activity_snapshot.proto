@@ -120,6 +120,7 @@ message Backend {
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
     // Source: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_EXTENSION = 400; // Extension
+    // Wait events from extensions bundled with Postgres as part of contrib
     WAIT_EVENT_PG_STAT_STATEMENTS = 401; // pg_stat_statements
     // Source: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
     WAIT_EVENT_ARCHIVER_MAIN = 500; // ArchiverMain
@@ -254,10 +255,11 @@ message Backend {
     WAIT_EVENT_WAL_SYNC = 965; // WALSync
     WAIT_EVENT_WAL_SYNC_METHOD_ASSIGN = 966; // WALSyncMethodAssign
     WAIT_EVENT_WAL_WRITE = 967; // WALWrite
-    // Custom third-party events for Postgres forks
-    WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (Aurora)
-    AURORA_READER_MAIN = 10001; // AuroraReaderMain (Aurora)
-    AURORA_RUNTIME_MAIN = 10002; // AuroraRuntimeMain (Aurora)
+    // Custom third-party events for extensions and Postgres forks
+    WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (AWS Aurora)
+    WAIT_EVENT_AURORA_READER_MAIN = 10001; // AuroraReaderMain (AWS Aurora)
+    WAIT_EVENT_AURORA_RUNTIME_MAIN = 10002; // AuroraRuntimeMain (AWS Aurora)
+    WAIT_EVENT_CITUS_QUERY_STATS = 10003; // citus_query_stats (Citus Enterprise)
   }
 
   uint64 identity = 1; // Server-wide unique identifier (backend_start + PID)
