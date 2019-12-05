@@ -114,6 +114,8 @@ message SystemInformation {
     SELF_HOSTED_SYSTEM = 0;
     AMAZON_RDS_SYSTEM = 1;
     HEROKU_SYSTEM = 2;
+    GOOGLE_CLOUD_SQL_SYSTEM = 3;
+    AZURE_DATABASE_SYSTEM = 4;
   }
 
   SystemType type = 1;
