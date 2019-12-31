@@ -165,7 +165,7 @@
   "LockFileAddToDataDirWrite": 920,
   "LockFileCreateRead": 921,
   "LockFileCreateSync": 922,
-  "LockFileCreateWRITE": 923,
+  "LockFileCreateWrite": 923,
   "LockFileReCheckDataDirRead": 924,
   "LogicalRewriteCheckpointSync": 925,
   "LogicalRewriteMappingSync": 926,
