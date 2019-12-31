@@ -146,6 +146,7 @@ message Backend {
     WAIT_EVENT_WAL_RECEIVER_WAIT_START = 605; // WalReceiverWaitStart
     WAIT_EVENT_WAL_SENDER_WAIT_WAL = 606; // WalSenderWaitForWAL
     WAIT_EVENT_WAL_SENDER_WRITE_DATA = 607; // WalSenderWriteData
+    WAIT_EVENT_GSS_OPEN_SERVER = 608; // GSSOpenServer
     // Source: pgstat.h (WaitEventIPC enum), pgstat.c (pgstat_get_wait_ipc function)
     WAIT_EVENT_BGWORKER_SHUTDOWN = 700; // BgWorkerShutdown
     WAIT_EVENT_BGWORKER_STARTUP = 701; // BgWorkerStartup
@@ -182,6 +183,8 @@ message Backend {
     WAIT_EVENT_REPLICATION_SLOT_DROP = 732; // ReplicationSlotDrop
     WAIT_EVENT_SAFE_SNAPSHOT = 733; // SafeSnapshot
     WAIT_EVENT_SYNC_REP = 734; // SyncRep
+    WAIT_EVENT_CHECKPOINT_DONE = 735; // CheckpointDone
+    WAIT_EVENT_CHECKPOINT_START = 736; // CheckpointStart
     // Source: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
     WAIT_EVENT_BASE_BACKUP_THROTTLE = 800; // BaseBackupThrottle
     WAIT_EVENT_PG_SLEEP = 801; // PgSleep
@@ -255,6 +258,7 @@ message Backend {
     WAIT_EVENT_WAL_SYNC = 965; // WALSync
     WAIT_EVENT_WAL_SYNC_METHOD_ASSIGN = 966; // WALSyncMethodAssign
     WAIT_EVENT_WAL_WRITE = 967; // WALWrite
+    WAIT_EVENT_PROC_SIGNAL_BARRIER = 968; // ProcSignalBarrier
     // Custom third-party events for extensions and Postgres forks
     WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (AWS Aurora)
     WAIT_EVENT_AURORA_READER_MAIN = 10001; // AuroraReaderMain (AWS Aurora)
