@@ -9,6 +9,10 @@ message CompactActivitySnapshot {
   PostgresVersion postgres_version = 1;
   repeated Backend backends = 2;
 
+  // Timestamp of the previous activity snapshot (collected_at) to support the
+  // receiver marking values as having been last visible with the prior snapshot
+  google.protobuf.Timestamp prev_activity_snapshot_at = 3;
+
   repeated VacuumProgressInformation vacuum_progress_informations = 10;
   repeated VacuumProgressStatistic vacuum_progress_statistics = 11;
 }
