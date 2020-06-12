@@ -180,7 +180,8 @@ message StandbyStatistic {
   string write_location = 4;
   string flush_location = 5;
   string replay_location = 6;
-  int64 byte_lag = 7;
+  int64 remote_byte_lag = 7;
+  int64 local_byte_lag = 8;
 }
 
 message BackendCountStatistic {
