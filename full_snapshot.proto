@@ -287,6 +287,11 @@ message RelationInformation {
 
   map<string, string> options = 14;
 
+  int32 parent_relation_idx = 15;
+  bool has_parent_relation = 16;
+
+  string partition_boundary = 17;
+
   message Column {
     string name = 2;
     string data_type = 3;
