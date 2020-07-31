@@ -291,6 +291,7 @@ message RelationInformation {
   bool has_parent_relation = 16;
 
   string partition_boundary = 17;
+  repeated int32 partition_columns = 18; // For tables range-partitioned by one or more columns, the list of columns
 
   message Column {
     string name = 2;
