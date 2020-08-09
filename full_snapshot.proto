@@ -396,6 +396,14 @@ message FunctionInformation {
   bool strict = 13;
   bool returns_set = 14;
   string volatile = 15;
+  enum FunctionKind {
+    UNKNOWN = 0;
+    FUNCTION = 1;
+    AGGREGATE = 2;
+    WINDOW = 3;
+    PROCEDURE = 4;
+  }
+  FunctionKind kind = 16;
 }
 
 message FunctionStatistic {
