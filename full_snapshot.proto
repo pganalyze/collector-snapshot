@@ -292,6 +292,17 @@ message RelationInformation {
 
   string partition_boundary = 17;
 
+  enum PartitionStrategy {
+    UNKNOWN = 0;
+    RANGE = 1;
+    LIST = 2;
+    HASH = 3;
+  }
+
+  PartitionStrategy partition_strategy = 18;
+  repeated int32 partition_columns = 19; // list of either column index (when corresponding partition field is a column) or 0 (when expression)
+  string partitioned_by = 20;
+
   message Column {
     string name = 2;
     string data_type = 3;
