@@ -237,64 +237,57 @@ message TablespaceInformation {
 }
 
 message CollectorConfig {
-  bool enable_reports = 1;
+  string section_name = 1;
+
   bool disable_logs = 2;
   bool disable_activity = 3;
   bool enable_log_explain = 4;
 
-  string db_name = 5;
-  string db_username = 6;
-  string db_host = 7;
-  int32 db_port = 8;
-  string db_sslmode = 9;
-  string db_sslrootcert = 10;
-  string db_sslcert = 11;
-  string db_sslkey = 12;
+  string db_name = 14;
+  string db_username = 15;
+  string db_host = 16;
+  int32 db_port = 17;
+  string db_sslmode = 18;
+  string db_sslrootcert_path = 19;
+  string db_sslcert_path = 20;
+  string db_sslkey_path = 21;
 
-  repeated string db_extra_names = 13;
-  bool db_all_names = 14;
+  repeated string db_extra_names = 31;
+  bool db_all_names = 32;
 
-  string aws_region = 15;
-  string aws_db_instance_id = 16;
-  string aws_access_key_id = 17;
+  string aws_region = 42;
+  string aws_db_instance_id = 43;
+  bool aws_has_access_key_id = 44;;
 
-  string aws_endpoint_signing_region = 18;
-  string aws_endpoint_rds_signing_region = 19;
+  string azure_db_server_name = 54;
+  string azure_eventhub_namespace = 55;
+  string azure_eventhub_name = 56;
+  string azure_ad_tenant_id = 57;
+  string azure_ad_client_id = 58;
+  string azure_ad_certificate_path = 59;
 
-  string azure_db_server_name = 24;
-  string azure_eventhub_namespace = 25;
-  string azure_eventhub_name = 26;
-  string azure_ad_tenant_id = 27;
-  string azure_ad_client_id = 28;
-  string azure_ad_certificate_path = 30;
+  string gcp_cloudsql_instance_id = 69;
+  string gcp_pubsub_subscription = 70;
+  string gcp_credentials_file = 71;
+  string gcp_project_id = 72;
 
-  string gcp_cloudsql_instance_id = 32;
-  string gcp_pubsub_subscription = 33;
-  string gcp_credentials_file = 34;
-  string gcp_project_id = 35;
+  string api_system_id = 82;
+  string api_system_type = 83;
+  string api_system_scope = 84;
 
-  string section_name = 36;
+  string db_log_location = 94;
+  string db_log_docker_tail = 95;
 
-  string api_system_id = 37;
-  string api_system_type = 38;
-  string api_system_scope = 39;
+  string ignore_table_pattern = 105;
+  string ignore_schema_regexp = 106;
 
-  string db_log_location = 40;
+  int32 query_stats_interval = 116;
+  int32 max_collector_connections = 117;
 
-  string db_log_docker_tail = 41;
+  string filter_log_secret = 127;
+  string filter_query_sample = 128;
 
-  string ignore_table_pattern = 42;
-  string ignore_schema_regexp = 43;
-
-  int32 query_stats_interval = 44;
-  int32 max_collector_connections = 45;
-
-  string filter_log_secret = 46;
-  string filter_query_sample = 47;
-
-  string http_proxy = 48;
-  string https_proxy = 49;
-  string no_proxy = 50;
+  bool has_proxy = 129;
 }
 
 // PER DATABASE
