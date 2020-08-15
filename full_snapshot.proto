@@ -39,6 +39,7 @@ message FullSnapshot {
 
   repeated TablespaceReference tablespace_references = 130;
   repeated TablespaceInformation tablespace_informations = 131;
+  CollectorConfig config = 132;
 
   // Per database
   repeated QueryReference query_references = 200;
@@ -233,6 +234,67 @@ message TablespaceInformation {
   int32 disk_partition_idx = 2; // Disk partition that this tablespace resides on (-1 if unknown)
   int32 role_idx = 3;           // Owner of the tablespace, usually the user who created it
   repeated string config = 4;   // Tablespace-level options, as "keyword=value" strings
+}
+
+message CollectorConfig {
+  bool enable_reports = 1;
+  bool disable_logs = 2;
+  bool disable_activity = 3;
+  bool enable_log_explain = 4;
+
+  string db_name = 5;
+  string db_username = 6;
+  string db_host = 7;
+  int32 db_port = 8;
+  string db_sslmode = 9;
+  string db_sslrootcert = 10;
+  string db_sslcert = 11;
+  string db_sslkey = 12;
+
+  repeated string db_extra_names = 13;
+  bool db_all_names = 14;
+
+  string aws_region = 15;
+  string aws_db_instance_id = 16;
+  string aws_access_key_id = 17;
+
+  string aws_endpoint_signing_region = 18;
+  string aws_endpoint_rds_signing_region = 19;
+
+  string azure_db_server_name = 24;
+  string azure_eventhub_namespace = 25;
+  string azure_eventhub_name = 26;
+  string azure_ad_tenant_id = 27;
+  string azure_ad_client_id = 28;
+  string azure_ad_certificate_path = 30;
+
+  string gcp_cloudsql_instance_id = 32;
+  string gcp_pubsub_subscription = 33;
+  string gcp_credentials_file = 34;
+  string gcp_project_id = 35;
+
+  string section_name = 36;
+
+  string api_system_id = 37;
+  string api_system_type = 38;
+  string api_system_scope = 39;
+
+  string db_log_location = 40;
+
+  string db_log_docker_tail = 41;
+
+  string ignore_table_pattern = 42;
+  string ignore_schema_regexp = 43;
+
+  int32 query_stats_interval = 44;
+  int32 max_collector_connections = 45;
+
+  string filter_log_secret = 46;
+  string filter_query_sample = 47;
+
+  string http_proxy = 48;
+  string https_proxy = 49;
+  string no_proxy = 50;
 }
 
 // PER DATABASE
