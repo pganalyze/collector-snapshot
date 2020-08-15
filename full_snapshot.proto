@@ -17,6 +17,7 @@ message FullSnapshot {
   string snapshot_uuid = 10;
   google.protobuf.Timestamp collected_at = 11;
   uint32 collected_interval_secs = 12;
+  CollectorConfig config = 13;
 
   CollectorStatistic collector_statistic = 20;
   repeated string collector_errors = 21; // log error messages that happened during the collector run
@@ -39,7 +40,6 @@ message FullSnapshot {
 
   repeated TablespaceReference tablespace_references = 130;
   repeated TablespaceInformation tablespace_informations = 131;
-  CollectorConfig config = 132;
 
   // Per database
   repeated QueryReference query_references = 200;
