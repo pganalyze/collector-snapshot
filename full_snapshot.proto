@@ -248,9 +248,9 @@ message CollectorConfig {
   string db_host = 16;
   int32 db_port = 17;
   string db_sslmode = 18;
-  string db_sslrootcert_path = 19;
-  string db_sslcert_path = 20;
-  string db_sslkey_path = 21;
+  bool db_has_sslrootcert = 19;
+  bool db_has_sslcert = 20;
+  bool db_has_sslkey = 21;
 
   repeated string db_extra_names = 31;
   bool db_all_names = 32;
@@ -264,7 +264,7 @@ message CollectorConfig {
   string azure_eventhub_name = 56;
   string azure_ad_tenant_id = 57;
   string azure_ad_client_id = 58;
-  string azure_ad_certificate_path = 59;
+  bool azure_has_ad_certificate = 59;
 
   string gcp_cloudsql_instance_id = 69;
   string gcp_pubsub_subscription = 70;
