@@ -288,6 +288,7 @@ message CollectorConfig {
   string filter_query_sample = 128;
 
   bool has_proxy = 129;
+  bool config_from_env = 130;
 }
 
 // PER DATABASE
