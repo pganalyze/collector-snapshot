@@ -21,6 +21,11 @@ message FullSnapshot {
 
   CollectorStatistic collector_statistic = 20;
   repeated string collector_errors = 21; // log error messages that happened during the collector run
+  google.protobuf.Timestamp collector_started_at = 22;
+  string collector_os = 23; // coarse-grained, from runtime.GOOS
+  string collector_os_distro = 24; // e.g., ubuntu, amazon linux, redhat
+  string collector_os_version = 25; // distro-specific version string
+  string collector_init_system = 26; // e.g., upstart versus systemd
 
   // Per server (and hence snapshot)
   System system = 100;
