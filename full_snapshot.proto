@@ -22,10 +22,14 @@ message FullSnapshot {
   CollectorStatistic collector_statistic = 20;
   repeated string collector_errors = 21; // log error messages that happened during the collector run
   google.protobuf.Timestamp collector_started_at = 22;
-  string collector_os = 23; // coarse-grained, from runtime.GOOS
-  string collector_os_distro = 24; // e.g., ubuntu, amazon linux, redhat
-  string collector_os_version = 25; // distro-specific version string
-  string collector_init_system = 26; // e.g., upstart versus systemd
+  string collector_hostname = 23;
+  string collector_architecture = 24;
+  string collector_operating_system = 25;
+  string collector_platform = 26;
+  string collector_platform_family = 27;
+  string collector_platform_version = 28;
+  string collector_virtualization_system = 29; // Name of the virtualization system (only if we're a guest)
+  string collector_kernel_version = 30;
 
   // Per server (and hence snapshot)
   System system = 100;
@@ -273,7 +277,7 @@ message CollectorConfig {
 
   string gcp_cloudsql_instance_id = 69;
   string gcp_pubsub_subscription = 70;
-  string gcp_credentials_file = 71;
+  string gcp_has_credentials_file = 71;
   string gcp_project_id = 72;
 
   string api_system_id = 82;
