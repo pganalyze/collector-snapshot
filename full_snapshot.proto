@@ -17,9 +17,19 @@ message FullSnapshot {
   string snapshot_uuid = 10;
   google.protobuf.Timestamp collected_at = 11;
   uint32 collected_interval_secs = 12;
+  CollectorConfig config = 13;
 
   CollectorStatistic collector_statistic = 20;
   repeated string collector_errors = 21; // log error messages that happened during the collector run
+  google.protobuf.Timestamp collector_started_at = 22;
+  string collector_hostname = 23;
+  string collector_architecture = 24;
+  string collector_operating_system = 25;
+  string collector_platform = 26;
+  string collector_platform_family = 27;
+  string collector_platform_version = 28;
+  string collector_virtualization_system = 29; // Name of the virtualization system (only if we're a guest)
+  string collector_kernel_version = 30;
 
   // Per server (and hence snapshot)
   System system = 100;
@@ -233,6 +243,61 @@ message TablespaceInformation {
   int32 disk_partition_idx = 2; // Disk partition that this tablespace resides on (-1 if unknown)
   int32 role_idx = 3;           // Owner of the tablespace, usually the user who created it
   repeated string config = 4;   // Tablespace-level options, as "keyword=value" strings
+}
+
+message CollectorConfig {
+  string section_name = 1;
+
+  bool disable_logs = 2;
+  bool disable_activity = 3;
+  bool enable_log_explain = 4;
+
+  string db_name = 14;
+  string db_username = 15;
+  string db_host = 16;
+  int32 db_port = 17;
+  string db_sslmode = 18;
+  bool db_has_sslrootcert = 19;
+  bool db_has_sslcert = 20;
+  bool db_has_sslkey = 21;
+
+  repeated string db_extra_names = 31;
+  bool db_all_names = 32;
+
+  string aws_region = 42;
+  string aws_db_instance_id = 43;
+  bool aws_has_access_key_id = 44;;
+
+  string azure_db_server_name = 54;
+  string azure_eventhub_namespace = 55;
+  string azure_eventhub_name = 56;
+  string azure_ad_tenant_id = 57;
+  string azure_ad_client_id = 58;
+  bool azure_has_ad_certificate = 59;
+
+  string gcp_cloudsql_instance_id = 69;
+  string gcp_pubsub_subscription = 70;
+  string gcp_has_credentials_file = 71;
+  string gcp_project_id = 72;
+
+  string api_system_id = 82;
+  string api_system_type = 83;
+  string api_system_scope = 84;
+
+  string db_log_location = 94;
+  string db_log_docker_tail = 95;
+
+  string ignore_table_pattern = 105;
+  string ignore_schema_regexp = 106;
+
+  int32 query_stats_interval = 116;
+  int32 max_collector_connections = 117;
+
+  string filter_log_secret = 127;
+  string filter_query_sample = 128;
+
+  bool has_proxy = 129;
+  bool config_from_env = 130;
 }
 
 // PER DATABASE
