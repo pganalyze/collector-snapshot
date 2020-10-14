@@ -277,7 +277,7 @@ message CollectorConfig {
 
   string gcp_cloudsql_instance_id = 69;
   string gcp_pubsub_subscription = 70;
-  string gcp_has_credentials_file = 71;
+  bool gcp_has_credentials_file = 71;
   string gcp_project_id = 72;
 
   string api_system_id = 82;
