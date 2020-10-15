@@ -30,6 +30,8 @@ message FullSnapshot {
   string collector_platform_version = 28;
   string collector_virtualization_system = 29; // Name of the virtualization system (only if we're a guest)
   string collector_kernel_version = 30;
+  bool collector_log_snapshot_disabled = 31;
+  string collector_log_snapshot_disabled_reason = 32;
 
   // Per server (and hence snapshot)
   System system = 100;
