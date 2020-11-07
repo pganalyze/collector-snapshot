@@ -286,6 +286,7 @@ message CollectorConfig {
   string api_system_id = 82;
   string api_system_type = 83;
   string api_system_scope = 84;
+  string api_system_scope_fallback = 85;
 
   string db_log_location = 94;
   string db_log_docker_tail = 95;
