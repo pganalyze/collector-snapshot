@@ -262,6 +262,7 @@ message CollectorConfig {
   bool db_has_sslrootcert = 19;
   bool db_has_sslcert = 20;
   bool db_has_sslkey = 21;
+  string db_url = 22;
 
   repeated string db_extra_names = 31;
   bool db_all_names = 32;
