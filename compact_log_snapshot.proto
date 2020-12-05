@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "shared.proto";
 
 package pganalyze.collector;
 
@@ -215,7 +216,8 @@ message QuerySample {
   google.protobuf.Timestamp occurred_at = 2;
   double runtime_ms = 3;
   string query_text = 4;
-  repeated string parameters = 5;
+  repeated string parameters_legacy = 5; // Deprecated as of Dec 2020, but may still used by older versions of the app
+  repeated NullString parameters = 6;
 
   string log_line_uuid = 10;
 
