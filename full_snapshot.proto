@@ -269,7 +269,9 @@ message CollectorConfig {
 
   string aws_region = 42;
   string aws_db_instance_id = 43;
-  bool aws_has_access_key_id = 44;;
+  bool aws_has_access_key_id = 44;
+  bool aws_has_assume_role = 45;
+  bool aws_has_account_id = 46;
 
   string azure_db_server_name = 54;
   string azure_eventhub_namespace = 55;
@@ -296,12 +298,13 @@ message CollectorConfig {
 
   int32 query_stats_interval = 116;
   int32 max_collector_connections = 117;
+  bool skip_if_replica = 118;
 
   string filter_log_secret = 127;
   string filter_query_sample = 128;
-
   bool has_proxy = 129;
   bool config_from_env = 130;
+  string filter_query_text = 131;
 }
 
 // PER DATABASE
