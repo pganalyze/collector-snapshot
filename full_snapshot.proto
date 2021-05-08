@@ -272,6 +272,8 @@ message CollectorConfig {
   bool aws_has_access_key_id = 44;
   bool aws_has_assume_role = 45;
   bool aws_has_account_id = 46;
+  bool aws_has_web_identity_token_file = 47;
+  bool aws_has_role_arn = 48;
 
   string azure_db_server_name = 54;
   string azure_eventhub_namespace = 55;
