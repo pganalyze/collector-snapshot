@@ -383,6 +383,15 @@ message RelationInformation {
     NullString default_value = 4;
     bool not_null = 5;
     int32 position = 6;
+    repeated ColumnStatistic statistics = 7;
+  }
+
+  message ColumnStatistic {
+    bool inherited = 1;
+    double null_frac = 2;
+    int32 avg_width = 3;
+    double n_distinct = 4;
+    NullDouble correlation = 5;
   }
 
   message Constraint {
