@@ -432,6 +432,7 @@ message RelationStatistic {
   int64 tidx_blks_read = 24;      // Number of disk blocks read from this table's TOAST table indexes (if any)
   int64 tidx_blks_hit = 25;       // Number of buffer hits in this table's TOAST table indexes (if any)
   int64 toast_size_bytes = 26;    // TOAST table and TOAST index size (included in size_bytes as well)
+  NullTimestamp analyzed_at = 27;
 }
 
 message RelationEvent {
