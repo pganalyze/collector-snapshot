@@ -386,7 +386,7 @@ message RelationInformation {
     bool not_null = 5;
     int32 position = 6;
     repeated ColumnStatistic statistics = 7;
-    int32 type_idx = 8;
+    NullInt32 type_idx = 8;
   }
 
   message ColumnStatistic {
