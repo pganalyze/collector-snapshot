@@ -528,6 +528,10 @@ message CustomTypeInformation {
     ENUM = 0;
     DOMAIN = 1;
     COMPOSITE = 2;
+    BASE = 3;
+    PSEUDO = 4;
+    RANGE = 5;
+    MULTIRANGE = 6;
   }
 
   message CompositeAttr {
