@@ -76,6 +76,8 @@ message FullSnapshot {
 
   repeated FunctionInformation function_informations = 227;
   repeated FunctionStatistic function_statistics = 228;
+
+  repeated CustomTypeInformation custom_type_informations = 229;
 }
 
 // PER SERVER
@@ -384,6 +386,7 @@ message RelationInformation {
     bool not_null = 5;
     int32 position = 6;
     repeated ColumnStatistic statistics = 7;
+    NullInt32 data_type_custom_idx = 8;
   }
 
   message ColumnStatistic {
@@ -507,4 +510,32 @@ message FunctionStatistic {
   int64 calls = 2;
   double total_time = 3;
   double self_time = 4;
+}
+
+message CustomTypeInformation {
+  int32 database_idx = 1;
+  string schema_name = 2;
+  string name = 3;
+  Type type = 4;
+  string domain_type = 5;
+  bool domain_not_null = 6;
+  string domain_default = 7;
+  string domain_constraint = 8;
+  repeated string enum_values = 9;
+  repeated CompositeAttr composite_attrs = 10;
+
+  enum Type {
+    ENUM = 0;
+    DOMAIN = 1;
+    COMPOSITE = 2;
+    BASE = 3;
+    PSEUDO = 4;
+    RANGE = 5;
+    MULTIRANGE = 6;
+  }
+
+  message CompositeAttr {
+    string name = 1;
+    string type = 2;
+  }
 }
