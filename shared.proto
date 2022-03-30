@@ -126,6 +126,7 @@ message SystemInformation {
     HEROKU_SYSTEM = 2;
     GOOGLE_CLOUD_SQL_SYSTEM = 3;
     AZURE_DATABASE_SYSTEM = 4;
+    CRUNCHY_BRIDGE_SYSTEM = 5;
   }
 
   SystemType type = 1;
