@@ -289,6 +289,8 @@ message CollectorConfig {
   bool gcp_has_credentials_file = 71;
   string gcp_project_id = 72;
 
+  string crunchy_bridge_cluster_id = 75;
+
   string api_system_id = 82;
   string api_system_type = 83;
   string api_system_scope = 84;
