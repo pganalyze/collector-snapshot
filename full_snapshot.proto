@@ -291,6 +291,8 @@ message CollectorConfig {
 
   string crunchy_bridge_cluster_id = 75;
 
+  string aiven_service_id = 79;
+
   string api_system_id = 82;
   string api_system_type = 83;
   string api_system_scope = 84;
