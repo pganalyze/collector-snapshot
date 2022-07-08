@@ -78,6 +78,8 @@ message FullSnapshot {
   repeated FunctionStatistic function_statistics = 228;
 
   repeated CustomTypeInformation custom_type_informations = 229;
+
+  repeated Extension extensions = 230;
 }
 
 // PER SERVER
@@ -148,6 +150,13 @@ message Setting {
   NullString source = 6;
   NullString source_file = 7;
   NullString source_line = 8;
+}
+
+message Extension {
+  int32 database_idx = 1;
+  string extension_name = 2;
+  string schema_name = 3;
+  string version = 4;
 }
 
 message Replication {
