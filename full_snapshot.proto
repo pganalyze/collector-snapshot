@@ -285,6 +285,8 @@ message CollectorConfig {
   bool aws_has_account_id = 46;
   bool aws_has_web_identity_token_file = 47;
   bool aws_has_role_arn = 48;
+  string aws_db_cluster_id = 49;
+  bool aws_db_cluster_readonly = 50;
 
   string azure_db_server_name = 54;
   string azure_eventhub_namespace = 55;
@@ -297,6 +299,8 @@ message CollectorConfig {
   string gcp_pubsub_subscription = 70;
   bool gcp_has_credentials_file = 71;
   string gcp_project_id = 72;
+  string gcp_alloydb_cluster_id = 73;
+  string gcp_alloydb_instance_id = 74;
 
   string crunchy_bridge_cluster_id = 75;
 
@@ -312,6 +316,8 @@ message CollectorConfig {
 
   string db_log_location = 94;
   string db_log_docker_tail = 95;
+  string db_log_syslog_server = 96;
+  bool db_log_pg_read_file = 97;
 
   string ignore_table_pattern = 105;
   string ignore_schema_regexp = 106;
