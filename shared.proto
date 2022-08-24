@@ -182,6 +182,8 @@ message SystemInformationAmazonRDS {
   bool parameter_auto_explain_enabled = 42;
 
   bool is_aurora_postgres = 50;
+
+  map<string, string> tags = 60;
 }
 
 message SchedulerStatistic {
