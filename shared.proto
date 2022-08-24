@@ -137,6 +137,8 @@ message SystemInformation {
     SystemInformationAmazonRDS amazon_rds = 3;
   }
 
+  map<string, string> resource_tags = 4;
+
   google.protobuf.Timestamp boot_time = 10; // Timestamp for when the system was started (aka uptime)
 }
 
@@ -182,8 +184,6 @@ message SystemInformationAmazonRDS {
   bool parameter_auto_explain_enabled = 42;
 
   bool is_aurora_postgres = 50;
-
-  map<string, string> tags = 60;
 }
 
 message SchedulerStatistic {
