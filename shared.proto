@@ -137,6 +137,8 @@ message SystemInformation {
     SystemInformationAmazonRDS amazon_rds = 3;
   }
 
+  map<string, string> resource_tags = 4;
+
   google.protobuf.Timestamp boot_time = 10; // Timestamp for when the system was started (aka uptime)
 }
 
