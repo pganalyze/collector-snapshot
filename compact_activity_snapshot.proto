@@ -125,13 +125,16 @@ message Backend {
     WAIT_EVENT_LOCKTAG_USERLOCK = 208; // userlock
     WAIT_EVENT_LOCKTAG_ADVISORY = 209; // advisory
     WAIT_EVENT_LOCKTAG_FROZEN = 210; // frozenid
-    // Source: pgstat.c (pgstat_get_wait_event function)
+    // Source: wait_event.c (pgstat_get_wait_event function)
+    // Before 14: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
-    // Source: pgstat.c (pgstat_get_wait_event function)
+    // Source: wait_event.c (pgstat_get_wait_event function)
+    // Before 14: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_EXTENSION = 400; // Extension
     // Wait events from extensions bundled with Postgres as part of contrib
     WAIT_EVENT_PG_STAT_STATEMENTS = 401; // pg_stat_statements
-    // Source: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
+    // Source: wait_event.h (WaitEventActivity enum), wait_event.c (pgstat_get_wait_activity function)
+    // Before 14: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
     WAIT_EVENT_ARCHIVER_MAIN = 500; // ArchiverMain
     WAIT_EVENT_AUTOVACUUM_MAIN = 501; // AutoVacuumMain
     WAIT_EVENT_BGWRITER_HIBERNATE = 502; // BgWriterHibernate
@@ -146,7 +149,8 @@ message Backend {
     WAIT_EVENT_WAL_RECEIVER_MAIN = 511; // WalReceiverMain
     WAIT_EVENT_WAL_SENDER_MAIN = 512; // WalSenderMain
     WAIT_EVENT_WAL_WRITER_MAIN = 513; // WalWriterMain
-    // Source: pgstat.h (WaitEventClient enum), pgstat.c (pgstat_get_wait_client function)
+    // Source: wait_event.h (WaitEventClient enum), wait_event.c (pgstat_get_wait_client function)
+    // Before 14: pgstat.h (WaitEventClient enum), pgstat.c (pgstat_get_wait_client function)
     WAIT_EVENT_CLIENT_READ = 600; // ClientRead
     WAIT_EVENT_CLIENT_WRITE = 601; // ClientWrite
     WAIT_EVENT_LIBPQWALRECEIVER_CONNECT = 602; // LibPQWalReceiverConnect
@@ -156,7 +160,8 @@ message Backend {
     WAIT_EVENT_WAL_SENDER_WAIT_WAL = 606; // WalSenderWaitForWAL
     WAIT_EVENT_WAL_SENDER_WRITE_DATA = 607; // WalSenderWriteData
     WAIT_EVENT_GSS_OPEN_SERVER = 608; // GSSOpenServer
-    // Source: pgstat.h (WaitEventIPC enum), pgstat.c (pgstat_get_wait_ipc function)
+    // Source: wait_event.h (WaitEventIPC enum), wait_event.c (pgstat_get_wait_ipc function)
+    // Before 14: pgstat.h (WaitEventIPC enum), pgstat.c (pgstat_get_wait_ipc function)
     WAIT_EVENT_BGWORKER_SHUTDOWN = 700; // BgWorkerShutdown
     WAIT_EVENT_BGWORKER_STARTUP = 701; // BgWorkerStartup
     WAIT_EVENT_BTREE_PAGE = 702; // BtreePage
@@ -194,11 +199,13 @@ message Backend {
     WAIT_EVENT_SYNC_REP = 734; // SyncRep
     WAIT_EVENT_CHECKPOINT_DONE = 735; // CheckpointDone
     WAIT_EVENT_CHECKPOINT_START = 736; // CheckpointStart
-    // Source: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
+    // Source: wait_event.h (WaitEventTimeout enum), wait_event.c (pgstat_get_wait_timeout function)
+    // Before 14: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
     WAIT_EVENT_BASE_BACKUP_THROTTLE = 800; // BaseBackupThrottle
     WAIT_EVENT_PG_SLEEP = 801; // PgSleep
     WAIT_EVENT_RECOVERY_APPLY_DELAY = 802; // RecoveryApplyDelay
-    // Source: pgstat.h (WaitEventIO enum), pgstat.c (pgstat_get_wait_io function)
+    // Source: wait_event.h (WaitEventIO enum), wait_event.c (pgstat_get_wait_io function)
+    // Before 14: pgstat.h (WaitEventIO enum), pgstat.c (pgstat_get_wait_io function)
     WAIT_EVENT_BUFFILE_READ = 900; // BufFileRead
     WAIT_EVENT_BUFFILE_WRITE = 901; // BufFileWrite
     WAIT_EVENT_CONTROL_FILE_READ = 902; // ControlFileRead
