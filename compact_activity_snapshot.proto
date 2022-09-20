@@ -88,19 +88,19 @@ message Backend {
     WAIT_EVENT_LWLOCK_WRAP_LIMITS_VACUUM_LOCK = 180; // WrapLimitsVacuumLock
     WAIT_EVENT_LWLOCK_NOTIFY_QUEUE_TAIL_LOCK = 181; // NotifyQueueTailLock
     // Source: lwlock.h (BuiltinTrancheIds), lwlock.c (BuiltinTrancheNames)
-    WAIT_EVENT_LWTRANCHE_CLOG_BUFFERS = 146; // clog, XactBuffer
-    WAIT_EVENT_LWTRANCHE_COMMITTS_BUFFERS = 147; // commit_timestamp, CommitTSBuffer
-    WAIT_EVENT_LWTRANCHE_SUBTRANS_BUFFERS = 148; // subtrans, SubtransBuffer
-    WAIT_EVENT_LWTRANCHE_MXACTOFFSET_BUFFERS = 149; // multixact_offset, MultiXactOffsetBuffer
-    WAIT_EVENT_LWTRANCHE_MXACTMEMBER_BUFFERS = 150; // multixact_member, MultiXactMemberBuffer
-    WAIT_EVENT_LWTRANCHE_NOTIFY_BUFFERS = 151; // async, NotifyBuffer
-    WAIT_EVENT_LWTRANCHE_SERIAL_BUFFERS = 152; // oldserxid, SerialBuffer
+    WAIT_EVENT_LWTRANCHE_XACT_BUFFER = 146; // clog, XactBuffer
+    WAIT_EVENT_LWTRANCHE_COMMITTS_BUFFER = 147; // commit_timestamp, CommitTSBuffer
+    WAIT_EVENT_LWTRANCHE_SUBTRANS_BUFFER = 148; // subtrans, SubtransBuffer
+    WAIT_EVENT_LWTRANCHE_MULTIXACTOFFSET_BUFFER = 149; // multixact_offset, MultiXactOffsetBuffer
+    WAIT_EVENT_LWTRANCHE_MULTIXACTMEMBER_BUFFER = 150; // multixact_member, MultiXactMemberBuffer
+    WAIT_EVENT_LWTRANCHE_NOTIFY_BUFFER = 151; // async, NotifyBuffer
+    WAIT_EVENT_LWTRANCHE_SERIAL_BUFFER = 152; // oldserxid, SerialBuffer
     WAIT_EVENT_LWTRANCHE_WAL_INSERT = 153; // wal_insert, WALInsert
     WAIT_EVENT_LWTRANCHE_BUFFER_CONTENT = 154; // buffer_content, BufferContent
-    WAIT_EVENT_LWTRANCHE_BUFFER_IO_IN_PROGRESS = 155; // buffer_io, BufferIO
-    WAIT_EVENT_LWTRANCHE_REPLICATION_ORIGIN = 156; // replication_origin, ReplicationOriginState
-    WAIT_EVENT_LWTRANCHE_REPLICATION_SLOT_IO_IN_PROGRESS = 157; // replication_slot_io, ReplicationSlotIO
-    WAIT_EVENT_LWTRANCHE_LOCK_FAST_PATH = 158; // proc, LockFastPath
+    WAIT_EVENT_LWTRANCHE_BUFFER_IO = 155; // buffer_io, BufferIO
+    WAIT_EVENT_LWTRANCHE_REPLICATION_ORIGIN_STATE = 156; // replication_origin, ReplicationOriginState
+    WAIT_EVENT_LWTRANCHE_REPLICATION_SLOT_IO = 157; // replication_slot_io, ReplicationSlotIO
+    WAIT_EVENT_LWTRANCHE_LOCK_FASTPATH = 158; // proc, LockFastPath
     WAIT_EVENT_LWTRANCHE_BUFFER_MAPPING = 159; // buffer_mapping, BufferMapping
     WAIT_EVENT_LWTRANCHE_LOCK_MANAGER = 160; // lock_manager, LockManager
     WAIT_EVENT_LWTRANCHE_PREDICATE_LOCK_MANAGER = 161; // predicate_lock_manager, PredicateLockManager
@@ -110,7 +110,7 @@ message Backend {
     WAIT_EVENT_LWTRANCHE_PER_SESSION_RECORD_TYPE = 165; // session_record_table, PerSessionRecordType
     WAIT_EVENT_LWTRANCHE_PER_SESSION_RECORD_TYPMOD = 166; // session_typmod_table, PerSessionRecordTypmod
     WAIT_EVENT_LWTRANCHE_SHARED_TUPLESTORE = 167; // shared_tuplestore, SharedTupleStore
-    WAIT_EVENT_LWTRANCHE_SHARED_TID_BITMAP = 168; // tbm, SharedTidBitmap
+    WAIT_EVENT_LWTRANCHE_SHARED_TIDBITMAP = 168; // tbm, SharedTidBitmap
     WAIT_EVENT_LWTRANCHE_PARALLEL_APPEND = 169; // parallel_append, ParallelAppend
     WAIT_EVENT_LWTRANCHE_PER_XACT_PREDICATE_LIST = 170; // serializable_xact, PerXactPredicateList
     // Source: lock.h (LockTagType enum), lockfuncs.c (LockTagTypeNames variable)
@@ -124,7 +124,7 @@ message Backend {
     WAIT_EVENT_LOCKTAG_OBJECT = 207; // object
     WAIT_EVENT_LOCKTAG_USERLOCK = 208; // userlock
     WAIT_EVENT_LOCKTAG_ADVISORY = 209; // advisory
-    WAIT_EVENT_LOCKTAG_FROZEN = 210; // frozenid
+    WAIT_EVENT_LOCKTAG_DABASE_FROZEN_IDS = 210; // frozenid
     // Source: wait_event.c (pgstat_get_wait_event function)
     // Before 14: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
