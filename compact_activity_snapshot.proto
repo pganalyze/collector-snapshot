@@ -120,10 +120,11 @@ message Backend {
     WAIT_EVENT_LOCKTAG_TUPLE = 203; // tuple
     WAIT_EVENT_LOCKTAG_TRANSACTION = 204; // transactionid
     WAIT_EVENT_LOCKTAG_VIRTUALTRANSACTION = 205; // virtualxid
-    WAIT_EVENT_LOCKTAG_SPECULATIVE_TOKEN = 206;  // speculative token
+    WAIT_EVENT_LOCKTAG_SPECULATIVE_TOKEN = 206;  // speculative token, spectoken
     WAIT_EVENT_LOCKTAG_OBJECT = 207; // object
     WAIT_EVENT_LOCKTAG_USERLOCK = 208; // userlock
     WAIT_EVENT_LOCKTAG_ADVISORY = 209; // advisory
+    WAIT_EVENT_LOCKTAG_FROZEN = 210; // frozenid
     // Source: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
     // Source: pgstat.c (pgstat_get_wait_event function)
