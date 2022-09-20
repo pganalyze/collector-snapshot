@@ -199,6 +199,12 @@ message Backend {
     WAIT_EVENT_SYNC_REP = 734; // SyncRep
     WAIT_EVENT_CHECKPOINT_DONE = 735; // CheckpointDone
     WAIT_EVENT_CHECKPOINT_START = 736; // CheckpointStart
+    WAIT_EVENT_APPEND_READY = 737; // AppendReady
+    WAIT_EVENT_BACKEND_TERMINATION = 738; // BackendTermination
+    WAIT_EVENT_BACKUP_WAIT_WAL_ARCHIVE = 739; // BackupWaitWalArchive
+    WAIT_EVENT_RECOVERY_CONFLICT_SNAPSHOT = 740; // RecoveryConflictSnapshot
+    WAIT_EVENT_RECOVERY_CONFLICT_TABLESPACE = 741; // RecoveryConflictTablespace
+    WAIT_EVENT_RECOVERY_PAUSE = 742; // RecoveryPause
     // Source: wait_event.h (WaitEventTimeout enum), wait_event.c (pgstat_get_wait_timeout function)
     // Before 14: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
     WAIT_EVENT_BASE_BACKUP_THROTTLE = 800; // BaseBackupThrottle
