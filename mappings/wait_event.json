@@ -55,6 +55,8 @@
   "LogicalRepWorkerLock": 144,
   "CLogTruncationLock": 145,
   "XactTruncationLock": 145,
+  "WrapLimitsVacuumLock": 180,
+  "NotifyQueueTailLock": 181,
   "clog": 146,
   "commit_timestamp": 147,
   "subtrans": 148,
