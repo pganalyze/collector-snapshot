@@ -204,6 +204,10 @@ message Backend {
     WAIT_EVENT_BASE_BACKUP_THROTTLE = 800; // BaseBackupThrottle
     WAIT_EVENT_PG_SLEEP = 801; // PgSleep
     WAIT_EVENT_RECOVERY_APPLY_DELAY = 802; // RecoveryApplyDelay
+    WAIT_EVENT_RECOVERY_RETRIEVE_RETRY_INTERVAL = 803; // RecoveryRetrieveRetryInterval
+    WAIT_EVENT_REGISTER_SYNC_REQUEST = 804; // RegisterSyncRequest
+    WAIT_EVENT_VACUUM_DELAY = 805; // VacuumDelay
+    WAIT_EVENT_CHECKPOINT_WRITE_DELAY = 806; // CheckpointWriteDelay
     // Source: wait_event.h (WaitEventIO enum), wait_event.c (pgstat_get_wait_io function)
     // Before 14: pgstat.h (WaitEventIO enum), pgstat.c (pgstat_get_wait_io function)
     WAIT_EVENT_BUFFILE_READ = 900; // BufFileRead
