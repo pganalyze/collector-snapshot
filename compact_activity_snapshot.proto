@@ -48,12 +48,12 @@ message Backend {
     WAIT_EVENT_LWLOCK_WAL_BUF_MAPPING_LOCK = 107; // WALBufMappingLock
     WAIT_EVENT_LWLOCK_WAL_WRITE_LOCK = 108; // WALWriteLock
     WAIT_EVENT_LWLOCK_CONTROL_FILE_LOCK = 109; // ControlFileLock
-    WAIT_EVENT_LWLOCK_CHECKPOINT_LOCK = 110; // CheckpointLock
-    WAIT_EVENT_LWLOCK_C_LOG_CONTROL_LOCK = 111; // CLogControlLock
-    WAIT_EVENT_LWLOCK_SUBTRANS_CONTROL_LOCK = 112; // SubtransControlLock
+    WAIT_EVENT_LWLOCK_CHECKPOINT_LOCK = 110; // CheckpointLock (removed in 14)
+    WAIT_EVENT_LWLOCK_XACT_SLRU_LOCK = 111; // CLogControlLock, XactSLRULock
+    WAIT_EVENT_LWLOCK_SUBTRANS_SLRU_LOCK = 112; // SubtransControlLock, SubtransSLRULock
     WAIT_EVENT_LWLOCK_MULTI_XACT_GEN_LOCK = 113; // MultiXactGenLock
-    WAIT_EVENT_LWLOCK_MULTI_XACT_OFFSET_CONTROL_LOCK = 114; // MultiXactOffsetControlLock
-    WAIT_EVENT_LWLOCK_MULTI_XACT_MEMBER_CONTROL_LOCK = 115; // MultiXactMemberControlLock
+    WAIT_EVENT_LWLOCK_MULTI_XACT_OFFSET_SLRU_LOCK = 114; // MultiXactOffsetControlLock, MultiXactOffsetSLRULock
+    WAIT_EVENT_LWLOCK_MULTI_XACT_MEMBER_SLRU_LOCK = 115; // MultiXactMemberControlLock, MultiXactMemberSLRULock
     WAIT_EVENT_LWLOCK_REL_CACHE_INIT_LOCK = 116; // RelCacheInitLock
     WAIT_EVENT_LWLOCK_CHECKPOINTER_COMM_LOCK = 117; // CheckpointerCommLock
     WAIT_EVENT_LWLOCK_TWO_PHASE_STATE_LOCK = 118; // TwoPhaseStateLock
@@ -64,51 +64,55 @@ message Backend {
     WAIT_EVENT_LWLOCK_AUTOVACUUM_SCHEDULE_LOCK = 123; // AutovacuumScheduleLock
     WAIT_EVENT_LWLOCK_SYNC_SCAN_LOCK = 124; // SyncScanLock
     WAIT_EVENT_LWLOCK_RELATION_MAPPING_LOCK = 125; // RelationMappingLock
-    WAIT_EVENT_LWLOCK_ASYNC_CTL_LOCK = 126; // AsyncCtlLock
-    WAIT_EVENT_LWLOCK_ASYNC_QUEUE_LOCK = 127; // AsyncQueueLock
+    WAIT_EVENT_LWLOCK_NOTIFY_SLRU_LOCK = 126; // AsyncCtlLock, NotifySLRULock
+    WAIT_EVENT_LWLOCK_NOTIFY_QUEUE_LOCK = 127; // AsyncQueueLock, NotifyQueueLock
     WAIT_EVENT_LWLOCK_SERIALIZABLE_XACT_HASH_LOCK = 128; // SerializableXactHashLock
     WAIT_EVENT_LWLOCK_SERIALIZABLE_FINISHED_LIST_LOCK = 129; // SerializableFinishedListLock
-    WAIT_EVENT_LWLOCK_SERIALIZABLE_PREDICATE_LOCK_LIST_LOCK = 130; // SerializablePredicateLockListLock
-    WAIT_EVENT_LWLOCK_OLD_SER_XID_LOCK = 131; // OldSerXidLock
+    WAIT_EVENT_LWLOCK_SERIALIZABLE_PREDICATE_LIST_LOCK = 130; // SerializablePredicateLockListLock, SerializablePredicateListLock
+    WAIT_EVENT_LWLOCK_SERIAL_SLRU_LOCK = 131; // OldSerXidLock, SerialSLRULock
     WAIT_EVENT_LWLOCK_SYNC_REP_LOCK = 132; // SyncRepLock
     WAIT_EVENT_LWLOCK_BACKGROUND_WORKER_LOCK = 133; // BackgroundWorkerLock
     WAIT_EVENT_LWLOCK_DYNAMIC_SHARD_MEMORY_CONTROL_LOCK = 134; // DynamicSharedMemoryControlLock
     WAIT_EVENT_LWLOCK_AUTO_FILE_LOCK = 135; // AutoFileLock
     WAIT_EVENT_LWLOCK_REPLICATION_SLOT_ALLOCATION_LOCK = 136; // ReplicationSlotAllocationLock
     WAIT_EVENT_LWLOCK_REPLICATION_SLOT_CONTROL_LOCK = 137; // ReplicationSlotControlLock
-    WAIT_EVENT_LWLOCK_COMMIT_TS_CONTROL_LOCK = 138; // CommitTsControlLock
+    WAIT_EVENT_LWLOCK_COMMIT_TS_SLRU_LOCK = 138; // CommitTsControlLock, CommitTsSLRULock
     WAIT_EVENT_LWLOCK_COMMIT_TS_LOCK = 139; // CommitTsLock
     WAIT_EVENT_LWLOCK_REPLICATION_ORIGIN_LOCK = 140; // ReplicationOriginLock
     WAIT_EVENT_LWLOCK_MULTI_XACT_TRUNCATION_LOCK = 141; // MultiXactTruncationLock
     WAIT_EVENT_LWLOCK_OLD_SNAPSHOT_TIME_MAP_LOCK = 142; // OldSnapshotTimeMapLock
-    WAIT_EVENT_LWLOCK_BACKEND_RANDOM_LOCK = 143; // BackendRandomLock
+    WAIT_EVENT_LWLOCK_BACKEND_RANDOM_LOCK = 143; // BackendRandomLock (removed in 12)
     WAIT_EVENT_LWLOCK_LOGICAL_REP_WORKER_LOCK = 144; // LogicalRepWorkerLock
-    WAIT_EVENT_LWLOCK_CLOG_TRUNCATION_LOCK = 145; // CLogTruncationLock
-    // Source: lwlock.h (BuiltinTrancheIds)
-    WAIT_EVENT_LWTRANCHE_CLOG_BUFFERS = 146; // clog
-    WAIT_EVENT_LWTRANCHE_COMMITTS_BUFFERS = 147; // commit_timestamp
-    WAIT_EVENT_LWTRANCHE_SUBTRANS_BUFFERS = 148; // subtrans
-    WAIT_EVENT_LWTRANCHE_MXACTOFFSET_BUFFERS = 149; // multixact_offset
-    WAIT_EVENT_LWTRANCHE_MXACTMEMBER_BUFFERS = 150; // multixact_member
-    WAIT_EVENT_LWTRANCHE_ASYNC_BUFFERS = 151; // async
-    WAIT_EVENT_LWTRANCHE_OLDSERXID_BUFFERS = 152; // oldserxid
-    WAIT_EVENT_LWTRANCHE_WAL_INSERT = 153; // wal_insert
-    WAIT_EVENT_LWTRANCHE_BUFFER_CONTENT = 154; // buffer_content
-    WAIT_EVENT_LWTRANCHE_BUFFER_IO_IN_PROGRESS = 155; // buffer_io
-    WAIT_EVENT_LWTRANCHE_REPLICATION_ORIGIN = 156; // replication_origin
-    WAIT_EVENT_LWTRANCHE_REPLICATION_SLOT_IO_IN_PROGRESS = 157; // replication_slot_io
-    WAIT_EVENT_LWTRANCHE_PROC = 158; // proc
-    WAIT_EVENT_LWTRANCHE_BUFFER_MAPPING = 159; // buffer_mapping
-    WAIT_EVENT_LWTRANCHE_LOCK_MANAGER = 160; // lock_manager
-    WAIT_EVENT_LWTRANCHE_PREDICATE_LOCK_MANAGER = 161; // predicate_lock_manager
-    WAIT_EVENT_LWTRANCHE_PARALLEL_HASH_JOIN = 162; // parallel_hash_join
-    WAIT_EVENT_LWTRANCHE_PARALLEL_QUERY_DSA = 163; // parallel_query_dsa
-    WAIT_EVENT_LWTRANCHE_SESSION_DSA = 164; // session_dsa
-    WAIT_EVENT_LWTRANCHE_SESSION_RECORD_TABLE = 165; // session_record_table
-    WAIT_EVENT_LWTRANCHE_SESSION_TYPMOD_TABLE = 166; // session_typmod_table
-    WAIT_EVENT_LWTRANCHE_SHARED_TUPLESTORE = 167; // shared_tuplestore
-    WAIT_EVENT_LWTRANCHE_TBM = 168; // tbm
-    WAIT_EVENT_LWTRANCHE_PARALLEL_APPEND = 169; // parallel_append
+    WAIT_EVENT_LWLOCK_XACT_TRUNCATION_LOCK = 145; // CLogTruncationLock, XactTruncationLock
+    // (Jumping the number here as 146- is taken by LWTRANCHE)
+    WAIT_EVENT_LWLOCK_WRAP_LIMITS_VACUUM_LOCK = 180; // WrapLimitsVacuumLock
+    WAIT_EVENT_LWLOCK_NOTIFY_QUEUE_TAIL_LOCK = 181; // NotifyQueueTailLock
+    // Source: lwlock.h (BuiltinTrancheIds), lwlock.c (BuiltinTrancheNames)
+    WAIT_EVENT_LWTRANCHE_XACT_BUFFER = 146; // clog, XactBuffer
+    WAIT_EVENT_LWTRANCHE_COMMITTS_BUFFER = 147; // commit_timestamp, CommitTSBuffer
+    WAIT_EVENT_LWTRANCHE_SUBTRANS_BUFFER = 148; // subtrans, SubtransBuffer
+    WAIT_EVENT_LWTRANCHE_MULTIXACTOFFSET_BUFFER = 149; // multixact_offset, MultiXactOffsetBuffer
+    WAIT_EVENT_LWTRANCHE_MULTIXACTMEMBER_BUFFER = 150; // multixact_member, MultiXactMemberBuffer
+    WAIT_EVENT_LWTRANCHE_NOTIFY_BUFFER = 151; // async, NotifyBuffer
+    WAIT_EVENT_LWTRANCHE_SERIAL_BUFFER = 152; // oldserxid, SerialBuffer
+    WAIT_EVENT_LWTRANCHE_WAL_INSERT = 153; // wal_insert, WALInsert
+    WAIT_EVENT_LWTRANCHE_BUFFER_CONTENT = 154; // buffer_content, BufferContent
+    WAIT_EVENT_LWTRANCHE_BUFFER_IO = 155; // buffer_io, BufferIO
+    WAIT_EVENT_LWTRANCHE_REPLICATION_ORIGIN_STATE = 156; // replication_origin, ReplicationOriginState
+    WAIT_EVENT_LWTRANCHE_REPLICATION_SLOT_IO = 157; // replication_slot_io, ReplicationSlotIO
+    WAIT_EVENT_LWTRANCHE_LOCK_FASTPATH = 158; // proc, LockFastPath
+    WAIT_EVENT_LWTRANCHE_BUFFER_MAPPING = 159; // buffer_mapping, BufferMapping
+    WAIT_EVENT_LWTRANCHE_LOCK_MANAGER = 160; // lock_manager, LockManager
+    WAIT_EVENT_LWTRANCHE_PREDICATE_LOCK_MANAGER = 161; // predicate_lock_manager, PredicateLockManager
+    WAIT_EVENT_LWTRANCHE_PARALLEL_HASH_JOIN = 162; // parallel_hash_join, ParallelHashJoin
+    WAIT_EVENT_LWTRANCHE_PARALLEL_QUERY_DSA = 163; // parallel_query_dsa, ParallelQueryDSA
+    WAIT_EVENT_LWTRANCHE_PER_SESSION_DSA = 164; // session_dsa, PerSessionDSA
+    WAIT_EVENT_LWTRANCHE_PER_SESSION_RECORD_TYPE = 165; // session_record_table, PerSessionRecordType
+    WAIT_EVENT_LWTRANCHE_PER_SESSION_RECORD_TYPMOD = 166; // session_typmod_table, PerSessionRecordTypmod
+    WAIT_EVENT_LWTRANCHE_SHARED_TUPLESTORE = 167; // shared_tuplestore, SharedTupleStore
+    WAIT_EVENT_LWTRANCHE_SHARED_TIDBITMAP = 168; // tbm, SharedTidBitmap
+    WAIT_EVENT_LWTRANCHE_PARALLEL_APPEND = 169; // parallel_append, ParallelAppend
+    WAIT_EVENT_LWTRANCHE_PER_XACT_PREDICATE_LIST = 170; // serializable_xact, PerXactPredicateList
     // Source: lock.h (LockTagType enum), lockfuncs.c (LockTagTypeNames variable)
     WAIT_EVENT_LOCKTAG_RELATION = 200; // relation
     WAIT_EVENT_LOCKTAG_RELATION_EXTEND = 201;  // extend
@@ -116,17 +120,21 @@ message Backend {
     WAIT_EVENT_LOCKTAG_TUPLE = 203; // tuple
     WAIT_EVENT_LOCKTAG_TRANSACTION = 204; // transactionid
     WAIT_EVENT_LOCKTAG_VIRTUALTRANSACTION = 205; // virtualxid
-    WAIT_EVENT_LOCKTAG_SPECULATIVE_TOKEN = 206;  // speculative token
+    WAIT_EVENT_LOCKTAG_SPECULATIVE_TOKEN = 206;  // speculative token, spectoken
     WAIT_EVENT_LOCKTAG_OBJECT = 207; // object
     WAIT_EVENT_LOCKTAG_USERLOCK = 208; // userlock
     WAIT_EVENT_LOCKTAG_ADVISORY = 209; // advisory
-    // Source: pgstat.c (pgstat_get_wait_event function)
+    WAIT_EVENT_LOCKTAG_DABASE_FROZEN_IDS = 210; // frozenid
+    // Source: wait_event.c (pgstat_get_wait_event function)
+    // Before 14: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_BUFFER_PIN = 300; // BufferPin
-    // Source: pgstat.c (pgstat_get_wait_event function)
+    // Source: wait_event.c (pgstat_get_wait_event function)
+    // Before 14: pgstat.c (pgstat_get_wait_event function)
     WAIT_EVENT_EXTENSION = 400; // Extension
     // Wait events from extensions bundled with Postgres as part of contrib
     WAIT_EVENT_PG_STAT_STATEMENTS = 401; // pg_stat_statements
-    // Source: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
+    // Source: wait_event.h (WaitEventActivity enum), wait_event.c (pgstat_get_wait_activity function)
+    // Before 14: pgstat.h (WaitEventActivity enum), pgstat.c (pgstat_get_wait_activity function)
     WAIT_EVENT_ARCHIVER_MAIN = 500; // ArchiverMain
     WAIT_EVENT_AUTOVACUUM_MAIN = 501; // AutoVacuumMain
     WAIT_EVENT_BGWRITER_HIBERNATE = 502; // BgWriterHibernate
@@ -141,7 +149,8 @@ message Backend {
     WAIT_EVENT_WAL_RECEIVER_MAIN = 511; // WalReceiverMain
     WAIT_EVENT_WAL_SENDER_MAIN = 512; // WalSenderMain
     WAIT_EVENT_WAL_WRITER_MAIN = 513; // WalWriterMain
-    // Source: pgstat.h (WaitEventClient enum), pgstat.c (pgstat_get_wait_client function)
+    // Source: wait_event.h (WaitEventClient enum), wait_event.c (pgstat_get_wait_client function)
+    // Before 14: pgstat.h (WaitEventClient enum), pgstat.c (pgstat_get_wait_client function)
     WAIT_EVENT_CLIENT_READ = 600; // ClientRead
     WAIT_EVENT_CLIENT_WRITE = 601; // ClientWrite
     WAIT_EVENT_LIBPQWALRECEIVER_CONNECT = 602; // LibPQWalReceiverConnect
@@ -151,27 +160,28 @@ message Backend {
     WAIT_EVENT_WAL_SENDER_WAIT_WAL = 606; // WalSenderWaitForWAL
     WAIT_EVENT_WAL_SENDER_WRITE_DATA = 607; // WalSenderWriteData
     WAIT_EVENT_GSS_OPEN_SERVER = 608; // GSSOpenServer
-    // Source: pgstat.h (WaitEventIPC enum), pgstat.c (pgstat_get_wait_ipc function)
+    // Source: wait_event.h (WaitEventIPC enum), wait_event.c (pgstat_get_wait_ipc function)
+    // Before 14: pgstat.h (WaitEventIPC enum), pgstat.c (pgstat_get_wait_ipc function)
     WAIT_EVENT_BGWORKER_SHUTDOWN = 700; // BgWorkerShutdown
     WAIT_EVENT_BGWORKER_STARTUP = 701; // BgWorkerStartup
     WAIT_EVENT_BTREE_PAGE = 702; // BtreePage
-    WAIT_EVENT_CLOG_GROUP_UPDATE = 703; // ClogGroupUpdate
+    WAIT_EVENT_XACT_GROUP_UPDATE = 703; // ClogGroupUpdate, XactGroupUpdate
     WAIT_EVENT_EXECUTE_GATHER = 704; // ExecuteGather
-    WAIT_EVENT_HASH_BATCH_ALLOCATING = 705; // Hash/Batch/Allocating
-    WAIT_EVENT_HASH_BATCH_ELECTING = 706; // Hash/Batch/Electing
-    WAIT_EVENT_HASH_BATCH_LOADING = 707; // Hash/Batch/Loading
-    WAIT_EVENT_HASH_BUILD_ALLOCATING = 708; // Hash/Build/Allocating
-    WAIT_EVENT_HASH_BUILD_ELECTING = 709; // Hash/Build/Electing
-    WAIT_EVENT_HASH_BUILD_HASHING_INNER = 710; // Hash/Build/HashingInner
-    WAIT_EVENT_HASH_BUILD_HASHING_OUTER = 711; // Hash/Build/HashingOuter
-    WAIT_EVENT_HASH_GROW_BATCHES_ALLOCATING = 712; // Hash/GrowBatches/Allocating
-    WAIT_EVENT_HASH_GROW_BATCHES_DECIDING = 713; // Hash/GrowBatches/Deciding
-    WAIT_EVENT_HASH_GROW_BATCHES_ELECTING = 714; // Hash/GrowBatches/Electing
-    WAIT_EVENT_HASH_GROW_BATCHES_FINISHING = 715; // Hash/GrowBatches/Finishing
-    WAIT_EVENT_HASH_GROW_BATCHES_REPARTITIONING = 716; // Hash/GrowBatches/Repartitioning
-    WAIT_EVENT_HASH_GROW_BUCKETS_ALLOCATING = 717; // Hash/GrowBuckets/Allocating
-    WAIT_EVENT_HASH_GROW_BUCKETS_ELECTING = 718; // Hash/GrowBuckets/Electing
-    WAIT_EVENT_HASH_GROW_BUCKETS_REINSERTING = 719; // Hash/GrowBuckets/Reinserting
+    WAIT_EVENT_HASH_BATCH_ALLOCATE = 705; // Hash/Batch/Allocating, HashBatchAllocate
+    WAIT_EVENT_HASH_BATCH_ELECT = 706; // Hash/Batch/Electing, HashBatchElect
+    WAIT_EVENT_HASH_BATCH_LOAD = 707; // Hash/Batch/Loading, HashBatchLoad
+    WAIT_EVENT_HASH_BUILD_ALLOCATE = 708; // Hash/Build/Allocating, HashBuildAllocate
+    WAIT_EVENT_HASH_BUILD_ELECT = 709; // Hash/Build/Electing, HashBuildElect
+    WAIT_EVENT_HASH_BUILD_HASH_INNER = 710; // Hash/Build/HashingInner, HashBuildHashInner
+    WAIT_EVENT_HASH_BUILD_HASH_OUTER = 711; // Hash/Build/HashingOuter, HashBuildHashOuter
+    WAIT_EVENT_HASH_GROW_BATCHES_ALLOCATE = 712; // Hash/GrowBatches/Allocating, HashGrowBatchesAllocate
+    WAIT_EVENT_HASH_GROW_BATCHES_DECIDE = 713; // Hash/GrowBatches/Deciding, HashGrowBatchesDecide
+    WAIT_EVENT_HASH_GROW_BATCHES_ELECT = 714; // Hash/GrowBatches/Electing, HashGrowBatchesElect
+    WAIT_EVENT_HASH_GROW_BATCHES_FINISH = 715; // Hash/GrowBatches/Finishing, HashGrowBatchesFinish
+    WAIT_EVENT_HASH_GROW_BATCHES_REPARTITION = 716; // Hash/GrowBatches/Repartitioning, HashGrowBatchesRepartition
+    WAIT_EVENT_HASH_GROW_BUCKETS_ALLOCATE = 717; // Hash/GrowBuckets/Allocating, HashGrowBucketsAllocate
+    WAIT_EVENT_HASH_GROW_BUCKETS_ELECT = 718; // Hash/GrowBuckets/Electing, HashGrowBucketsElect
+    WAIT_EVENT_HASH_GROW_BUCKETS_REINSERT = 719; // Hash/GrowBuckets/Reinserting, HashGrowBucketsReinsert
     WAIT_EVENT_LOGICAL_SYNC_DATA = 720; // LogicalSyncData
     WAIT_EVENT_LOGICAL_SYNC_STATE_CHANGE = 721; // LogicalSyncStateChange
     WAIT_EVENT_MQ_INTERNAL = 722; // MessageQueueInternal
@@ -189,11 +199,23 @@ message Backend {
     WAIT_EVENT_SYNC_REP = 734; // SyncRep
     WAIT_EVENT_CHECKPOINT_DONE = 735; // CheckpointDone
     WAIT_EVENT_CHECKPOINT_START = 736; // CheckpointStart
-    // Source: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
+    WAIT_EVENT_APPEND_READY = 737; // AppendReady
+    WAIT_EVENT_BACKEND_TERMINATION = 738; // BackendTermination
+    WAIT_EVENT_BACKUP_WAIT_WAL_ARCHIVE = 739; // BackupWaitWalArchive
+    WAIT_EVENT_RECOVERY_CONFLICT_SNAPSHOT = 740; // RecoveryConflictSnapshot
+    WAIT_EVENT_RECOVERY_CONFLICT_TABLESPACE = 741; // RecoveryConflictTablespace
+    WAIT_EVENT_RECOVERY_PAUSE = 742; // RecoveryPause
+    // Source: wait_event.h (WaitEventTimeout enum), wait_event.c (pgstat_get_wait_timeout function)
+    // Before 14: pgstat.h (WaitEventTimeout enum), pgstat.c (pgstat_get_wait_timeout function)
     WAIT_EVENT_BASE_BACKUP_THROTTLE = 800; // BaseBackupThrottle
     WAIT_EVENT_PG_SLEEP = 801; // PgSleep
     WAIT_EVENT_RECOVERY_APPLY_DELAY = 802; // RecoveryApplyDelay
-    // Source: pgstat.h (WaitEventIO enum), pgstat.c (pgstat_get_wait_io function)
+    WAIT_EVENT_RECOVERY_RETRIEVE_RETRY_INTERVAL = 803; // RecoveryRetrieveRetryInterval
+    WAIT_EVENT_REGISTER_SYNC_REQUEST = 804; // RegisterSyncRequest
+    WAIT_EVENT_VACUUM_DELAY = 805; // VacuumDelay
+    WAIT_EVENT_CHECKPOINT_WRITE_DELAY = 806; // CheckpointWriteDelay
+    // Source: wait_event.h (WaitEventIO enum), wait_event.c (pgstat_get_wait_io function)
+    // Before 14: pgstat.h (WaitEventIO enum), pgstat.c (pgstat_get_wait_io function)
     WAIT_EVENT_BUFFILE_READ = 900; // BufFileRead
     WAIT_EVENT_BUFFILE_WRITE = 901; // BufFileWrite
     WAIT_EVENT_CONTROL_FILE_READ = 902; // ControlFileRead
@@ -262,7 +284,7 @@ message Backend {
     WAIT_EVENT_WAL_SYNC = 965; // WALSync
     WAIT_EVENT_WAL_SYNC_METHOD_ASSIGN = 966; // WALSyncMethodAssign
     WAIT_EVENT_WAL_WRITE = 967; // WALWrite
-    WAIT_EVENT_PROC_SIGNAL_BARRIER = 968; // ProcSignalBarrier
+    WAIT_EVENT_PROC_SIGNAL_BARRIER = 968; // ProcSignalBarrier (moved to IPC category in 13)
     // Custom third-party events for extensions and Postgres forks
     WAIT_EVENT_IO_XACT_SYNC = 10000; // XactSync (AWS Aurora)
     WAIT_EVENT_AURORA_READER_MAIN = 10001; // AuroraReaderMain (AWS Aurora)
