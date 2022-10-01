@@ -15,6 +15,9 @@ message CompactActivitySnapshot {
 
   repeated VacuumProgressInformation vacuum_progress_informations = 10;
   repeated VacuumProgressStatistic vacuum_progress_statistics = 11;
+
+  repeated LockInformation lock_informations = 20;
+  repeated LockFullInformation lock_full_informations = 21;
 }
 
 message Backend {
@@ -355,4 +358,27 @@ message VacuumProgressStatistic {
   int64 index_vacuum_count = 6;
   int64 max_dead_tuples = 7;
   int64 num_dead_tuples = 8;
+}
+
+message LockInformation {
+  int32 blocked_pid = 1;
+  repeated int64 blocking_pids = 2;
+}
+
+message LockFullInformation {
+  enum LockMode {
+    ACCESS_SHARE = 0;           // AccessShareLock
+    ROW_SHARE = 1;              // RowShareLock
+    ROW_EXCLUSIVE = 2;          // RowExclusiveLock
+    SHARE_UPDATE_EXCLUSIVE = 3; // ShareUpdateExclusiveLock
+    SHARE = 4;                  // ShareLock
+    SHARE_ROW_EXCLUSIVE = 5;    // ShareRowExclusiveLock
+    EXCLUSIVE = 6;              // ExclusiveLock
+    ACCESS_EXCLUSIVE = 7;       // AccessExclusiveLock
+  }
+  int32 blocked_pid = 1;
+  LockMode blocked_mode = 2;
+  string blocked_lock_type = 3;
+  int32 blocking_pid = 4;
+  LockMode blocking_mode = 5;
 }
