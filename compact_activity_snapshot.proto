@@ -321,6 +321,8 @@ message Backend {
   string wait_event_type = 19;
   string wait_event = 20;
   string backend_type = 21;
+
+  repeated int64 blocked_by_pids = 22;
 }
 
 message VacuumProgressInformation {
