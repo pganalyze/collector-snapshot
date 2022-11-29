@@ -185,6 +185,9 @@ message Replication {
   int64 apply_byte_lag = 23;
   google.protobuf.Timestamp replay_timestamp = 24;
   int64 replay_timestamp_age = 25; // in seconds
+
+  // Piggyback txid data
+  int64 current_xact_id = 30;
 }
 
 message StandbyReference {
