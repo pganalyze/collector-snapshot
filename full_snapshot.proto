@@ -146,8 +146,10 @@ message DatabaseStatistic {
   int32 database_idx = 1;
 
   uint32 transactions_per_sec = 2; // Transactions per second for this database
-  uint32 xid_age = 3; // Oldest transaction age for this database
-  uint32 mxid_age = 4; // Oldest multixact age for this database
+  uint32 min_xid = 3; // Oldest transaction ID for this database
+  uint32 min_mxid = 4; // Oldest multixact ID for this database
+  uint32 xid_age = 5; // Oldest transaction age for this database
+  uint32 mxid_age = 6; // Oldest multixact age for this database
 }
 
 message Setting {
@@ -188,6 +190,7 @@ message Replication {
 
   // Piggyback txid data
   int64 current_xact_id = 30;
+  int64 next_multi_xact_id = 31;
 }
 
 message StandbyReference {
@@ -471,8 +474,10 @@ message RelationStatistic {
   int64 toast_size_bytes = 26;    // TOAST table and TOAST index size (included in size_bytes as well)
   NullTimestamp analyzed_at = 27;
 
-  uint32 xid_age = 30; // Oldest transaction age for this relation
-  uint32 mxid_age = 31; // Oldest multixact age for this relation
+  uint32 min_xid = 30; // Oldest transaction ID for this relation
+  uint32 min_mxid = 31; // Oldest multixact ID for this relation
+  uint32 xid_age = 32; // Oldest transaction age for this relation
+  uint32 mxid_age = 33; // Oldest multixact age for this relation
 }
 
 message RelationEvent {
