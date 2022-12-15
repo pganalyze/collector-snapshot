@@ -149,6 +149,8 @@ message DatabaseStatistic {
   uint32 transactions_per_sec = 2; // Transactions per second for this database
   uint32 frozen_xid_age = 3; // The frozen xact ID age for this database (relative to latest stable xid)
   uint32 min_mxid_age = 4; // The minimum multixact ID age for this database (relative to latest stable mxid)
+  int64 xact_commit = 5; // Number of transactions in this database that have been committed
+  int64 xact_rollback = 6; // Number of transactions in this database that have been rolled back
 }
 
 // Postgres server statistic
