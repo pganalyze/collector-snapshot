@@ -156,8 +156,8 @@ message DatabaseStatistic {
 // Postgres server statistic
 // See System for server system statistic
 message ServerStatistic {
-  int64 current_xact_id = 1; // Current transaction ID for this server
-  int64 next_multi_xact_id = 2; // Next multixact ID for this server
+  int64 current_xact_id = 1; // Current transaction ID in xid8 (64-bit FullTransactionId) for this server
+  int64 next_multi_xact_id = 2; // Next multixact ID in xid8 (64-bit FullTransactionId) for this server
 }
 
 message Setting {
