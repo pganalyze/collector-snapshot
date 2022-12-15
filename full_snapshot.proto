@@ -43,6 +43,7 @@ message FullSnapshot {
   repeated RoleInformation role_informations = 110;
   repeated DatabaseInformation database_informations = 111;
   repeated DatabaseStatistic database_statictics = 112;
+  ServerStatistic server_statistic = 113;
 
   reserved 120;
   reserved 121; // This used to be backends before we moved them to their own compact snapshot
@@ -152,6 +153,13 @@ message DatabaseStatistic {
   uint32 mxid_age = 6; // Oldest multixact age for this database
 }
 
+// Postgres server statistic
+// See System for server system statistic
+message ServerStatistic {
+  int64 current_xact_id = 1; // Current transaction ID for this server
+  int64 next_multi_xact_id = 2; // Next multixact ID for this server
+}
+
 message Setting {
   string name = 1;
   string current_value = 2;
@@ -187,10 +195,6 @@ message Replication {
   int64 apply_byte_lag = 23;
   google.protobuf.Timestamp replay_timestamp = 24;
   int64 replay_timestamp_age = 25; // in seconds
-
-  // Piggyback txid data
-  int64 current_xact_id = 30;
-  int64 next_multi_xact_id = 31;
 }
 
 message StandbyReference {
