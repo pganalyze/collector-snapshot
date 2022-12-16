@@ -42,6 +42,8 @@ message FullSnapshot {
 
   repeated RoleInformation role_informations = 110;
   repeated DatabaseInformation database_informations = 111;
+  repeated DatabaseStatistic database_statictics = 112;
+  ServerStatistic server_statistic = 113;
 
   reserved 120;
   reserved 121; // This used to be backends before we moved them to their own compact snapshot
@@ -139,6 +141,22 @@ message DatabaseInformation {
 
   // Whether the collector was able to connect to this database and fetch local catalog data (e.g. schema)
   bool collected_local_catalog_data = 11;
+}
+
+message DatabaseStatistic {
+  int32 database_idx = 1;
+
+  int32 frozenxid_age = 2; // The age of frozen xact ID for this database (relative to latest stable xid)
+  int32 minmxid_age = 3; // The age of minimum multixact ID for this database (relative to latest stable mxid)
+  int32 xact_commit = 4; // Number of transactions in this database that have been committed
+  int32 xact_rollback = 5; // Number of transactions in this database that have been rolled back
+}
+
+// Postgres server statistic
+// See System for server system statistic
+message ServerStatistic {
+  int64 current_xact_id = 1; // Current transaction ID in xid8 (64-bit FullTransactionId) for this server
+  int64 next_multi_xact_id = 2; // Next multixact ID in xid8 (64-bit FullTransactionId) for this server
 }
 
 message Setting {
@@ -458,6 +476,9 @@ message RelationStatistic {
   int64 tidx_blks_hit = 25;       // Number of buffer hits in this table's TOAST table indexes (if any)
   int64 toast_size_bytes = 26;    // TOAST table and TOAST index size (included in size_bytes as well)
   NullTimestamp analyzed_at = 27;
+
+  int32 frozenxid_age = 30; // The age of frozen xact ID for this relation (relative to latest stable xid)
+  int32 minmxid_age = 31; // The age of minimum multixact ID for this relation (relative to latest stable mxid)
 }
 
 message RelationEvent {
