@@ -146,11 +146,10 @@ message DatabaseInformation {
 message DatabaseStatistic {
   int32 database_idx = 1;
 
-  uint32 transactions_per_sec = 2; // Transactions per second for this database
-  uint32 frozen_xid_age = 3; // The frozen xact ID age for this database (relative to latest stable xid)
-  uint32 min_mxid_age = 4; // The minimum multixact ID age for this database (relative to latest stable mxid)
-  int64 xact_commit = 5; // Number of transactions in this database that have been committed
-  int64 xact_rollback = 6; // Number of transactions in this database that have been rolled back
+  uint32 frozenxid_age = 2; // The age of frozen xact ID for this database (relative to latest stable xid)
+  uint32 minmxid_age = 3; // The age of minimum multixact ID for this database (relative to latest stable mxid)
+  uint32 xact_commit = 4; // Number of transactions in this database that have been committed
+  uint32 xact_rollback = 5; // Number of transactions in this database that have been rolled back
 }
 
 // Postgres server statistic
@@ -478,8 +477,8 @@ message RelationStatistic {
   int64 toast_size_bytes = 26;    // TOAST table and TOAST index size (included in size_bytes as well)
   NullTimestamp analyzed_at = 27;
 
-  uint32 frozen_xid_age = 30; // The frozen xact ID age for this relation (relative to latest stable xid)
-  uint32 min_mxid_age = 31; // The minimum multixact ID age for this relation (relative to latest stable mxid)
+  uint32 frozenxid_age = 30; // The age of frozen xact ID for this relation (relative to latest stable xid)
+  uint32 minmxid_age = 31; // The age of minimum multixact ID for this relation (relative to latest stable mxid)
 }
 
 message RelationEvent {
