@@ -479,6 +479,15 @@ message RelationStatistic {
 
   int32 frozenxid_age = 30; // The age of frozen xact ID for this relation (relative to latest stable xid)
   int32 minmxid_age = 31; // The age of minimum multixact ID for this relation (relative to latest stable mxid)
+
+  // For infrequently updated stats
+  int32 relpages = 40;                 // Size of the on-disk representation of this table in pages (of size BLCKSZ)
+  int64 reltuples = 41;                // Number of live rows in the table. -1 indicating that the row count is unknown
+  int32 relallvisible = 42;            // Number of pages that are marked all-visible in the table's visibility map
+  NullTimestamp last_vacuum = 43;      // Last time at which this table was manually vacuumed (not counting VACUUM FULL)
+  NullTimestamp last_autovacuum = 44;  // Last time at which this table was vacuumed by the autovacuum daemon
+  NullTimestamp last_analyze = 45;     // Last time at which this table was manually analyzed
+  NullTimestamp last_autoanalyze = 46; // Last time at which this table was analyzed by the autovacuum daemon
 }
 
 message RelationEvent {
