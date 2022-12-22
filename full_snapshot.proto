@@ -480,11 +480,11 @@ message RelationStatistic {
   int32 frozenxid_age = 30; // The age of frozen xact ID for this relation (relative to latest stable xid)
   int32 minmxid_age = 31; // The age of minimum multixact ID for this relation (relative to latest stable mxid)
 
-  // For infrequently updated stats
+  // Statistics that are infrequently updated (e.g. by VACUUM, ANALYZE, and a few DDL commands)
   int32 relpages = 40;                 // Size of the on-disk representation of this table in pages (of size BLCKSZ)
-  int64 reltuples = 41;                // Number of live rows in the table. -1 indicating that the row count is unknown
+  float reltuples = 41;                // Number of live rows in the table. -1 indicating that the row count is unknown
   int32 relallvisible = 42;            // Number of pages that are marked all-visible in the table's visibility map
-  int32 relfrozenxid = 43;             // All transaction IDs before this one have been replaced with a permanent (“frozen”) transaction ID in this table
+  int64 relfrozenxid = 43;             // All transaction IDs before this one have been replaced with a permanent (“frozen”) transaction ID in this table, in xid8 (64-bit FullTransactionId)
   int32 relminmxid = 44;               // All multixact IDs before this one have been replaced by a transaction ID in this table
   NullTimestamp last_vacuum = 45;      // Last time at which this table was manually vacuumed (not counting VACUUM FULL)
   NullTimestamp last_autovacuum = 46;  // Last time at which this table was vacuumed by the autovacuum daemon
