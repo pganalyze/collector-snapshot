@@ -485,7 +485,7 @@ message RelationStatistic {
   float reltuples = 41;                // Number of live rows in the table. -1 indicating that the row count is unknown
   int32 relallvisible = 42;            // Number of pages that are marked all-visible in the table's visibility map
   int64 relfrozenxid = 43;             // All transaction IDs before this one have been replaced with a permanent (“frozen”) transaction ID in this table, in xid8 (64-bit FullTransactionId)
-  int32 relminmxid = 44;               // All multixact IDs before this one have been replaced by a transaction ID in this table
+  int64 relminmxid = 44;               // All multixact IDs before this one have been replaced by a transaction ID in this table
   NullTimestamp last_vacuum = 45;      // Last time at which this table was manually vacuumed (not counting VACUUM FULL)
   NullTimestamp last_autovacuum = 46;  // Last time at which this table was vacuumed by the autovacuum daemon
   NullTimestamp last_analyze = 47;     // Last time at which this table was manually analyzed
