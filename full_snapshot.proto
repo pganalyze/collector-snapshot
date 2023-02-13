@@ -44,6 +44,7 @@ message FullSnapshot {
   repeated DatabaseInformation database_informations = 111;
   repeated DatabaseStatistic database_statictics = 112;
   ServerStatistic server_statistic = 113;
+  repeated HistoricServerIoStatistics historic_server_io_statistics = 114;
 
   reserved 120;
   reserved 121; // This used to be backends before we moved them to their own compact snapshot
@@ -157,6 +158,25 @@ message DatabaseStatistic {
 message ServerStatistic {
   int64 current_xact_id = 1; // Current transaction ID in xid8 (64-bit FullTransactionId) for this server
   int64 next_multi_xact_id = 2; // Next multixact ID in xid8 (64-bit FullTransactionId) for this server
+}
+
+// Postgres server I/O statistics (from pg_stat_io, in Postgres 16+)
+message HistoricServerIoStatistics {
+  google.protobuf.Timestamp collected_at = 1;
+  uint32 collected_interval_secs = 2;
+  repeated ServerIoStatistic statistics = 3;
+}
+message ServerIoStatistic {
+  string backend_type = 1;
+  string io_object = 2; // "relation" or "temp relation"
+  string io_context = 3; // "normal", "vacuum", "bulkread" or "bulkwrite"
+  int64 reads = 4;
+  int64 writes = 5;
+  int64 extends = 6;
+  int64 op_bytes = 7;
+  int64 evictions = 8;
+  int64 reuses = 9;
+  int64 fsyncs = 10;
 }
 
 message Setting {
