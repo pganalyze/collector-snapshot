@@ -160,8 +160,9 @@ message ServerStatistic {
 
   int64 xmin_horizon_backend = 3; // The oldest xmin for backends in xid8 (64-bit FullTransactionId)
   int64 xmin_horizon_replication_slot = 4; // The oldest xmin for replication slots in xid8 (64-bit FullTransactionId)
-  int64 xmin_horizon_prepared_xact = 5; // The oldest xmin for prepared transactions in xid8 (64-bit FullTransactionId)
-  int64 xmin_horizon_standby = 6; // The oldest xmin for standbys in xid8 (64-bit FullTransactionId)
+  int64 xmin_horizon_replication_slot_catalog = 5; // The oldest catalog_xmin for replication slots in xid8 (64-bit FullTransactionId)
+  int64 xmin_horizon_prepared_xact = 6; // The oldest xmin for prepared transactions in xid8 (64-bit FullTransactionId)
+  int64 xmin_horizon_standby = 7; // The oldest xmin for standbys in xid8 (64-bit FullTransactionId)
 }
 
 message Setting {
