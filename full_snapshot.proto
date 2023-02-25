@@ -400,8 +400,8 @@ message RelationInformation {
   bool has_inheritance_children = 9;
   bool has_toast = 10;
 
-  uint32 frozen_xid = 11; // deprecated in favor of relfrozenxid in RelationStatistic
-  uint32 minimum_multixact_xid = 12; // deprecated in favor of relminmxid in RelationStatistic
+  reserved 11; // frozen_xid, deprecated in favor of relfrozenxid in RelationStatistic
+  reserved 12; // minimum_multixact_xid, deprecated in favor of relminmxid in RelationStatistic
 
   // True if another process is currently holding an AccessExclusiveLock on this
   // relation, this also means we won't have columns/index/constraints information
