@@ -580,7 +580,7 @@ message CustomTypeInformation {
   string domain_type = 5;
   bool domain_not_null = 6;
   string domain_default = 7;
-  string domain_constraint = 8; // deprecated in favor of domain_constraints, field 11
+  reserved 8; // domain_constraint, deprecated in favor of domain_constraints, field 11
   repeated string enum_values = 9;
   repeated CompositeAttr composite_attrs = 10;
   repeated string domain_constraints = 11;
