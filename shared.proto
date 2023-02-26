@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 package pganalyze.collector;
+option go_package = "github.com/pganalyze/collector/output/pganalyze_collector";
 
 message NullString {
   bool valid = 1;

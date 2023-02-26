@@ -4,6 +4,7 @@ import "google/protobuf/timestamp.proto";
 import "shared.proto";
 
 package pganalyze.collector;
+option go_package = "github.com/pganalyze/collector/output/pganalyze_collector";
 
 message CompactActivitySnapshot {
   PostgresVersion postgres_version = 1;

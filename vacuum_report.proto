@@ -3,6 +3,7 @@ syntax = "proto3";
 import "shared.proto";
 
 package pganalyze.collector;
+option go_package = "github.com/pganalyze/collector/output/pganalyze_collector";
 
 message VacuumReportData {
   repeated DatabaseReference database_references = 10;
