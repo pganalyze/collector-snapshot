@@ -426,6 +426,8 @@ message RelationInformation {
   repeated int32 partition_columns = 19; // list of either column index (when corresponding partition field is a column) or 0 (when expression)
   string partitioned_by = 20;
 
+  NullString toast_table = 21;
+
   message Column {
     string name = 2;
     string data_type = 3;
@@ -497,6 +499,7 @@ message RelationStatistic {
   NullTimestamp last_autovacuum = 46;  // Last time at which this table was vacuumed by the autovacuum daemon
   NullTimestamp last_analyze = 47;     // Last time at which this table was manually analyzed
   NullTimestamp last_autoanalyze = 48; // Last time at which this table was analyzed by the autovacuum daemon
+  int32 toast_reltuples = 49;          // Number of live rows in the TOAST table. -1 indicating that the row count is unknown
 }
 
 message RelationEvent {
