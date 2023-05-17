@@ -500,6 +500,7 @@ message RelationStatistic {
   NullTimestamp last_analyze = 47;     // Last time at which this table was manually analyzed
   NullTimestamp last_autoanalyze = 48; // Last time at which this table was analyzed by the autovacuum daemon
   float toast_reltuples = 49;          // Number of live rows in the TOAST table. -1 indicating that the row count is unknown
+  int32 toast_relpages = 50;           // Size of the on-disk representation of the TOAST table in pages (of size BLCKSZ)
 }
 
 message RelationEvent {
