@@ -475,6 +475,7 @@ message RelationStatistic {
   int64 n_live_tup = 11;          // Estimated number of live rows
   int64 n_dead_tup = 12;          // Estimated number of dead rows
   int64 n_mod_since_analyze = 13; // Estimated number of rows modified since this table was last analyzed
+  int64 n_ins_since_vacuum = 14;  // Estimated number of rows inserted since this table was last vacuumed
   int64 heap_blks_read = 18;      // Number of disk blocks read from this table
   int64 heap_blks_hit = 19;       // Number of buffer hits in this table
   int64 idx_blks_read = 20;       // Number of disk blocks read from all indexes on this table
