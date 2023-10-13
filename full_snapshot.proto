@@ -356,6 +356,8 @@ message CollectorConfig {
   bool has_proxy = 129;
   bool config_from_env = 130;
   string filter_query_text = 131;
+
+  string otel_exporter_otlp_endpoint = 140;
 }
 
 // PER DATABASE
