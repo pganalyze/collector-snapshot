@@ -430,6 +430,8 @@ message RelationInformation {
 
   NullString toast_name = 21;
 
+  repeated ExtendedStatistic extended_stats = 22;
+
   message Column {
     string name = 2;
     string data_type = 3;
@@ -459,6 +461,21 @@ message RelationInformation {
     string foreign_update_type = 7;     // Foreign key update action code: a = no action, r = restrict, c = cascade, n = set null, d = set default
     string foreign_delete_type = 8;     // Foreign key deletion action code: a = no action, r = restrict, c = cascade, n = set null, d = set default
     string foreign_match_type = 9;      // Foreign key match type: f = full, p = partial, s = simple
+  }
+
+  // TODO: Should this be its own top-level item, with a reference back to the relation? (also possibly split this in reference, information and stats?)
+  message ExtendedStatistic {
+    string statistics_schema = 1;    // Schema this statistics object is located in (may be different than the table's schema)
+    string statistics_name = 2;      // Name of the statistics object (must be unique within the schema)
+    repeated int32 columns = 3;      // Columns that are analyzed for this statistics object
+    repeated string expressions = 4; // Expressions (represented as SQL) that are analyzed for this statistics object
+    repeated string kind = 5;        // Enabled statistics kinds: d = n-distinct statistics, f = functional dependency statistics, m = most common values (MCV) list statistics, e = expression statistics
+    bool has_data = 6;               // Whether data was retrieved successfully - ANALYZE must have been run, and we must have had enough permissions to read data
+
+    // Fields only set when data was retrieved successfully
+    bool inherited = 10;
+    NullString n_distinct = 11;
+    NullString dependencies = 12;
   }
 }
 
