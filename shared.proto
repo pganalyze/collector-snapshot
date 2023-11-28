@@ -136,6 +136,7 @@ message SystemInformation {
   oneof info {
     SystemInformationSelfHosted self_hosted = 2;
     SystemInformationAmazonRDS amazon_rds = 3;
+    SystemInformationCrunchyBridge crunchy_bridge = 5;
   }
 
   map<string, string> resource_tags = 4;
@@ -185,6 +186,17 @@ message SystemInformationAmazonRDS {
   bool parameter_auto_explain_enabled = 42;
 
   bool is_aurora_postgres = 50;
+}
+
+message SystemInformationCrunchyBridge {
+  string cluster_name = 1;
+  google.protobuf.Timestamp created_at = 2;
+  string plan_id = 3;
+  string provider_id = 4;
+  string region_id = 5;
+  int32 cpu_units = 6;
+  int32 storage_gb = 7;
+  double memory_gb = 8;
 }
 
 message SchedulerStatistic {
