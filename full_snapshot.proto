@@ -463,7 +463,6 @@ message RelationInformation {
     string foreign_match_type = 9;      // Foreign key match type: f = full, p = partial, s = simple
   }
 
-  // TODO: Should this be its own top-level item, with a reference back to the relation? (also possibly split this in reference, information and stats?)
   message ExtendedStatistic {
     string statistics_schema = 1;    // Schema this statistics object is located in (may be different than the table's schema)
     string statistics_name = 2;      // Name of the statistics object (must be unique within the schema)
