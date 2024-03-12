@@ -129,6 +129,7 @@ message SystemInformation {
     AZURE_DATABASE_SYSTEM = 4;
     CRUNCHY_BRIDGE_SYSTEM = 5;
     AIVEN_SYSTEM = 6;
+    TEMBO_SYSTEM = 7;
   }
 
   SystemType type = 1;
